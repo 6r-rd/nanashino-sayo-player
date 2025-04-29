@@ -1,8 +1,8 @@
-# EtoSora player
+# Nanashino Sayo player
 
-バーチャルユニット「[エトソラ](https://www.youtube.com/@etosora)」による YouTube ライブ配信のアーカイブ動画を再生するための非公式 Web サイトとその運用ツールです。
+Vsinger「[七篠さよ](https://www.youtube.com/@etosora)」による YouTube ライブ配信のアーカイブ動画を再生するための非公式 Web サイトとその運用ツールです。[EtoSora player](https://github.com/6r-rd/etosora-player) をテンプレートとして作成しています。
 
-Demo: https://6r-rd.github.io/etosora-player/
+Demo: https://6r-rd.github.io/nanashino-sayo-player/
 
 ![PlayerImage](https://github.com/user-attachments/assets/c61044eb-6371-4e2c-acb4-c1cd6e1d172e)
 
@@ -19,7 +19,7 @@ Demo: https://6r-rd.github.io/etosora-player/
 
 ### 注意事項
 
-EtoSora player では **[YouTube Data API](https://developers.google.com/youtube/v3/getting-started)** を使用して過去の配信データを取得し、タイムスタンプ付きで曲の情報を表示します。動画は **[YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference)** を利用して埋め込みます。
+Nanashino Sayo player では **[YouTube Data API](https://developers.google.com/youtube/v3/getting-started)** を使用して過去の配信データを取得し、タイムスタンプ付きで曲の情報を表示します。動画は **[YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference)** を利用して埋め込みます。
 
 そのため、以下の場合は動画を取得できません。
 
@@ -34,8 +34,8 @@ EtoSora player では **[YouTube Data API](https://developers.google.com/youtube
 
 ```bash
 # リポジトリのクローン
-git clone https://github.com/6r-rd/etosora-player.git
-cd etosora-player
+git clone https://github.com/6r-rd/nanashino-sayo-player.git
+cd nanashino-sayo-player
 
 # 依存関係のインストール
 npm install
@@ -119,7 +119,7 @@ GitHub Actions で配信データを取得した後、`public/` 以下の JSON �
 1. **設定の確認**
 
    - `astro.config.mjs` ファイルで `base` パスがリポジトリ名と一致していることを確認します
-   - 例: リポジトリ名が `etosora-player` の場合、`base: '/etosora-player'` と設定します
+   - 例: リポジトリ名が `nanashino-sayo-player` の場合、`base: '/nanashino-sayo-player'` と設定します
 
 2. **GitHub リポジトリの設定**
 
