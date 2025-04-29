@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Video",
+  "description": "Schema for YouTube video information with timestamps",
+  "type": "object",
+  "required": ["video_id", "title", "start_datetime", "thumbnail_url", "timestamps"],
+  "properties": {
+    "video_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$",
+      "description": "YouTube video ID"
+    },
+    "title": {
+      "type": "string",
+      "description": "Video title"
+    },
+    "start_datetime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Video start date and time in ISO 8601 format"
+    },
+    "thumbnail_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to video thumbnail"
+    },
+    "timestamps": {
+      "type": "array",
+      "description": "List of song timestamps in the video",
+      "items": {
+        "type": "object",
+        "required": ["time", "song_id"],
+        "properties": {
+          "time": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Timestamp in seconds from the start of the video"
+          },
+          "original_time": {
+            "type": "string",
+            "description": "Original timestamp from comment in format HH:MM:SS, H:MM:SS, MM:SS, or M:SS",
+            "pattern": "^([0-9]{1,2}:)?[0-5]?[0-9]:[0-5][0-9]$"
+          },
+          "song_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$",
+            "description": "Reference to song ID in songs.json"
+          },
+          "comment_source": {
+            "type": "string",
+            "enum": ["description", "comment"],
+            "description": "Source of the timestamp information"
+          },
+          "comment_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the comment if source is a comment"
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description or comment about the timestamp"
+          }
+        }
+      }
+    }
+  }
+}

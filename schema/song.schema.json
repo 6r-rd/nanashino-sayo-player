@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Song",
+  "description": "Schema for song information",
+  "type": "object",
+  "required": ["song_id", "title", "artist_ids"],
+  "properties": {
+    "song_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$",
+      "description": "Unique identifier for the song"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the song"
+    },
+  "artist_ids": {
+    "type": "array",
+    "description": "References to artist_id in artists.json",
+    "items": {
+      "type": "string"
+    }
+  },
+    "alternate_titles": {
+      "type": "array",
+      "description": "Alternative titles or spellings for the song",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the song"
+    }
+  }
+}

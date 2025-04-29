@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Artist",
+  "description": "Schema for artist information",
+  "type": "object",
+  "required": ["artist_id", "name"],
+  "properties": {
+    "artist_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{11}$",
+      "description": "Unique identifier for the artist"
+    },
+    "name": {
+      "type": "string",
+      "description": "Primary name of the artist"
+    },
+    "aliases": {
+      "type": "array",
+      "description": "Alternative names or spellings for the artist",
+      "items": {
+        "type": "string"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Optional description or information about the artist"
+    }
+  }
+}

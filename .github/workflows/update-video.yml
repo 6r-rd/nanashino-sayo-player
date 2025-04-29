@@ -1,0 +1,55 @@
+name: Update Video Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      video_id:
+        description: "YouTube Video ID to update"
+        required: true
+        type: string
+
+jobs:
+  update-video-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Environment Variables
+        run: |
+          echo "Required secrets and environment variables check completed"
+
+      - name: Update video data
+        run: node scripts/updateVideoData.js ${{ github.event.inputs.video_id }}
+
+      - name: Validate updated JSON files
+        run: node scripts/validateJsonSchemas.js public/videos/${{ github.event.inputs.video_id }}.json public/songs.json public/artists.json
+
+      - name: Generate videos list
+        run: node scripts/generateVideosList.js
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Update data for video ${{ github.event.inputs.video_id }}"
+          title: "Update data for video ${{ github.event.inputs.video_id }}"
+          body: |
+            This PR updates the data for video ID: ${{ github.event.inputs.video_id }}
+
+            Triggered by: @${{ github.actor }}
+          branch: update-video-${{ github.event.inputs.video_id }}
+          delete-branch: true

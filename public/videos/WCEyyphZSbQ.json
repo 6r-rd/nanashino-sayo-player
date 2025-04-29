@@ -1,0 +1,36 @@
+{
+  "video_id": "WCEyyphZSbQ",
+  "title": "【 #歌枠 】✧ 春一番、エトソラ歌枠 ✧【エトソラ/Etosora】",
+  "start_datetime": "2024-04-18T01:23:07Z",
+  "thumbnail_url": "https://i.ytimg.com/vi/WCEyyphZSbQ/maxresdefault.jpg",
+  "timestamps": [
+    {
+      "time": 417,
+      "original_time": "00:06:57",
+      "song_id": "S8vP-mK5R7t",
+      "comment_source": "comment",
+      "comment_date": "2024-08-13T11:02:43Z"
+    },
+    {
+      "time": 1647,
+      "original_time": "00:27:27",
+      "song_id": "MtrycOi-Jjy",
+      "comment_source": "comment",
+      "comment_date": "2024-08-13T11:02:43Z"
+    },
+    {
+      "time": 2696,
+      "original_time": "00:44:56",
+      "song_id": "PK6BDFjvE5c",
+      "comment_source": "comment",
+      "comment_date": "2024-08-13T11:02:43Z"
+    },
+    {
+      "time": 3159,
+      "original_time": "00:52:39",
+      "song_id": "_upucbsKWdv",
+      "comment_source": "comment",
+      "comment_date": "2024-08-13T11:02:43Z"
+    }
+  ]
+}

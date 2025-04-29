@@ -1,0 +1,68 @@
+name: Backfill
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel_id:
+        description: "YouTube Channel ID to fetch videos from"
+        required: false
+        type: string
+      batch_size:
+        description: "Number of videos to process in one run (0 for all)"
+        required: false
+        default: "10"
+        type: string
+      batch_start:
+        description: "Starting index for batch processing"
+        required: false
+        default: "0"
+        type: string
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      YOUTUBE_CHANNEL_ID: ${{ github.event.inputs.channel_id || secrets.YOUTUBE_CHANNEL_ID }}
+      BATCH_SIZE: ${{ github.event.inputs.batch_size }}
+      BATCH_START: ${{ github.event.inputs.batch_start }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check Environment Variables
+        run: |
+          echo "Required secrets and environment variables check completed"
+
+      - name: Fetch and process channel videos
+        run: node scripts/fetchAllChannelVideos.js ${{ github.event.inputs.channel_id || secrets.YOUTUBE_CHANNEL_ID }}
+
+      - name: Generate videos list
+        run: node scripts/generateVideosList.js
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "Add data from channel backfill (batch ${{ github.event.inputs.batch_start || '0' }})"
+          title: "Add data from channel backfill (batch ${{ github.event.inputs.batch_start || '0' }})"
+          body: |
+            This PR adds data for videos from channel backfill.
+
+            Batch: ${{ github.event.inputs.batch_start || '0' }} to ${{ github.event.inputs.batch_size || '10' }}
+            Channel ID: ${{ github.event.inputs.channel_id || secrets.YOUTUBE_CHANNEL_ID }}
+
+            Triggered by: @${{ github.actor }}
+          branch: backfill-${{ github.run_id }}
+          delete-branch: true

@@ -1,0 +1,180 @@
+---
+import PlayerLayout from "../layouts/PlayerLayout.astro";
+import { Sidebar } from "../components/Sidebar";
+import { Button } from "@/components/ui/button";
+import type { ArtistData, SongData, VideoData } from "../lib/types";
+
+// Import JSON files directly
+import artistsJson from "../../public/artists.json";
+import songsJson from "../../public/songs.json";
+
+// Dynamically import all video JSON files
+const videoModules = import.meta.glob("../../public/videos/*.json", {
+  eager: true,
+});
+const videos = Object.values(videoModules) as VideoData[];
+
+// Process data
+const artists = artistsJson.artists as ArtistData[];
+const songs = songsJson.songs as SongData[];
+
+// Calculate song play counts
+const playCounts: Record<string, number> = {};
+videos.forEach((video) => {
+  video.timestamps.forEach((timestamp) => {
+    const songId = timestamp.song_id;
+    playCounts[songId] = (playCounts[songId] || 0) + 1;
+  });
+});
+
+// Enrich song data with artist names and play counts
+const enrichedSongs = songs.map((song) => {
+  // Handle multiple artist IDs
+  const artistNames = song.artist_ids
+    .map((id) => {
+      const artist = artists.find((a) => a.artist_id === id);
+      return artist ? artist.name : "";
+    })
+    .filter(Boolean); // Remove empty strings
+
+  return {
+    ...song,
+    artist_names: artistNames,
+    artist_name: artistNames.join(", ") || "",
+    count: playCounts[song.song_id] || 0,
+  };
+});
+
+// Create artists map for the sidebar
+const artistsMap: Record<string, string> = {};
+artists.forEach((artist) => {
+  artistsMap[artist.artist_id] = artist.name;
+});
+
+// Get a random video and song for the sample buttons
+const randomVideo =
+  videos.length > 0 ? videos[Math.floor(Math.random() * videos.length)] : null;
+
+const randomSong =
+  enrichedSongs.length > 0
+    ? enrichedSongs[Math.floor(Math.random() * enrichedSongs.length)]
+    : null;
+
+const randomVideoId = randomVideo?.video_id || "AZ6KhfbTPDk"; // Fallback to existing ID
+const randomSongId = randomSong?.song_id || "T9nF-qT4Z6p"; // Fallback to existing ID
+---
+
+<PlayerLayout title="EtoSora player">
+  <Sidebar
+    slot="sidebar"
+    videos={videos}
+    songs={enrichedSongs}
+    artists={artistsMap}
+    client:load
+  />
+
+  <div
+    class="flex items-center justify-center h-[calc(100vh-6rem)] overflow-x-hidden w-full"
+  >
+    <div
+      class="w-full max-w-[100%] sm:max-w-lg mx-auto p-2 sm:p-4 space-y-6 sm:space-y-10 overflow-hidden"
+    >
+      <p
+        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
+      >
+        これはバーチャルユニット「<a
+          class="font-bold text-blue-600 no-underline"
+          href="https://www.youtube.com/@etosora">エトソラ</a
+        >」の YouTube
+        ライブ配信のうち「歌枠」をタイトルに含むアーカイブ動画を再生するための非公式
+        Web サイトです。
+      </p>
+      <p
+        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
+      >
+        再生を開始するには、サイドバーの Archives
+        タブから動画を選択してください。
+      </p>
+      <p
+        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
+      >
+        サイドバーの Songs
+        タブから曲を選択すると、その曲が含まれる動画の一覧が表示されます。
+      </p>
+      <p
+        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
+      >
+        下のボタンからランダムに動画や曲を選択することもできます。
+      </p>
+      <div class="flex flex-row gap-4 justify-center">
+        <Button id="random-video-btn" className="h-12 px-4">
+          <a
+            id="random-video-link"
+            href={`${import.meta.env.BASE_URL}/video/${randomVideoId}`}
+            class="flex items-center justify-center w-full h-full"
+            >ランダム動画選択</a
+          >
+        </Button>
+        <Button id="random-song-btn" className="h-12 px-4">
+          <a
+            id="random-song-link"
+            href={`${import.meta.env.BASE_URL}/song/${randomSongId}`}
+            class="flex items-center justify-center w-full h-full"
+            >ランダム曲選択</a
+          >
+        </Button>
+      </div>
+
+      <script
+        define:vars={{
+          videos,
+          enrichedSongs,
+          basePath: import.meta.env.BASE_URL,
+        }}
+      >
+        // Function to get a random item from an array
+        function getRandomItem(array) {
+          return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Function to update random video link
+        function updateRandomVideoLink(e) {
+          e.preventDefault();
+          if (videos.length === 0) return;
+
+          const randomVideo = getRandomItem(videos);
+          const randomVideoId = randomVideo.video_id;
+          const link = document.getElementById("random-video-link");
+          link.href = `${basePath}/video/${randomVideoId}`;
+          window.location.href = link.href;
+        }
+
+        // Function to update random song link
+        function updateRandomSongLink(e) {
+          e.preventDefault();
+          if (enrichedSongs.length === 0) return;
+
+          const randomSong = getRandomItem(enrichedSongs);
+          const randomSongId = randomSong.song_id;
+          const link = document.getElementById("random-song-link");
+          link.href = `${basePath}/song/${randomSongId}`;
+          window.location.href = link.href;
+        }
+
+        // Add event listeners
+        document.addEventListener("DOMContentLoaded", () => {
+          const videoBtn = document.getElementById("random-video-btn");
+          const songBtn = document.getElementById("random-song-btn");
+
+          if (videoBtn) {
+            videoBtn.addEventListener("click", updateRandomVideoLink);
+          }
+
+          if (songBtn) {
+            songBtn.addEventListener("click", updateRandomSongLink);
+          }
+        });
+      </script>
+    </div>
+  </div>
+</PlayerLayout>

@@ -1,0 +1,11 @@
+---
+import { getCollection } from "astro:content";
+---
+
+<meta
+  http-equiv="refresh"
+  content={`0;url=${import.meta.env.BASE_URL || "/"}`}
+/>
+<script>
+  window.location.href = import.meta.env.BASE_URL || "/";
+</script>

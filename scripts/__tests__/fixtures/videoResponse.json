@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "id": "test-video-id",
+      "snippet": {
+        "title": "【 #歌枠 】✧ テスト動画 ✧【テスト】",
+        "description": "テスト動画の説明文です。\n\n00:06:25 星を編む / seiza\n00:20:38 トレモロ / RADWIMPS\n00:32:02 深海のリトルクライ / sasakure.UK\n00:52:41 春泥棒 / ヨルシカ\n01:05:00 神のまにまに / れるりり",
+        "publishedAt": "2025-03-31T18:00:00Z",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/test-video-id/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/test-video-id/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/test-video-id/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          },
+          "standard": {
+            "url": "https://i.ytimg.com/vi/test-video-id/sddefault.jpg",
+            "width": 640,
+            "height": 480
+          },
+          "maxres": {
+            "url": "https://i.ytimg.com/vi/test-video-id/maxresdefault.jpg",
+            "width": 1280,
+            "height": 720
+          }
+        }
+      }
+    }
+  ]
+}

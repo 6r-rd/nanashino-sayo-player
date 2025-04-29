@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "snippet": {
+        "topLevelComment": {
+          "snippet": {
+            "textDisplay": "素晴らしい歌声でした！\n\n01:15:30 君じゃなきゃダメみたい / オーイシマサヨシ",
+            "publishedAt": "2025-04-01T19:30:00Z",
+            "likeCount": 150
+          }
+        }
+      }
+    },
+    {
+      "snippet": {
+        "topLevelComment": {
+          "snippet": {
+            "textDisplay": "タイムスタンプまとめ：\n01:25:45 踊り子 / Vaundy\n01:35:20 サウンド / baker",
+            "publishedAt": "2025-04-01T19:45:00Z",
+            "likeCount": 120
+          }
+        }
+      }
+    },
+    {
+      "snippet": {
+        "topLevelComment": {
+          "snippet": {
+            "textDisplay": "01:45:10 プラネテス / seiza\nこの曲大好き！",
+            "publishedAt": "2025-04-01T20:00:00Z",
+            "likeCount": 80
+          }
+        }
+      }
+    },
+    {
+      "snippet": {
+        "topLevelComment": {
+          "snippet": {
+            "textDisplay": "素敵な配信をありがとう！",
+            "publishedAt": "2025-04-01T20:15:00Z",
+            "likeCount": 50
+          }
+        }
+      }
+    },
+    {
+      "snippet": {
+        "topLevelComment": {
+          "snippet": {
+            "textDisplay": "02:00:15 もののけ姫 / 米良美一\n02:10:30 ドライフラワー / 優里",
+            "publishedAt": "2025-04-01T20:30:00Z",
+            "likeCount": 30
+          }
+        }
+      }
+    }
+  ],
+  "nextPageToken": "next-page-token"
+}

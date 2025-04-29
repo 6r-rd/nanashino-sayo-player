@@ -1,0 +1,206 @@
+---
+import PlayerLayout from "../../layouts/PlayerLayout.astro";
+import { Sidebar } from "../../components/Sidebar";
+import { YouTubePlayer } from "../../components/YouTubePlayer";
+import { Button } from "@/components/ui/button";
+import type {
+  ArtistData,
+  SongData,
+  VideoData,
+  VideoTimestamp,
+} from "../../lib/types";
+import { createNamespacedLogger } from "../../lib/debug";
+
+// ページ用のロガーを作成
+const logger = createNamespacedLogger("page:video");
+// We'll use the Astro.glob API instead of fs/path for browser compatibility
+
+// Set to true for static site generation (required for GitHub Pages)
+export const prerender = true;
+
+// Define all possible paths for static generation
+export async function getStaticPaths() {
+  // Dynamically import all video JSON files
+  const videoModules = import.meta.glob("../../../public/videos/*.json", {
+    eager: true,
+  });
+
+  // Extract video IDs from file paths
+  const videoIds = Object.keys(videoModules)
+    .map((path) => {
+      // Extract the filename without extension
+      const filename = path.split("/").pop()?.replace(".json", "");
+      return filename;
+    })
+    .filter(Boolean);
+
+  // ビルド時は logger が定義されていない可能性があるため、console.log を使用
+  console.log(`Generated static paths for ${videoIds.length} videos`);
+
+  // Return a path for each video
+  return videoIds.map((id) => ({
+    params: { video_id: id },
+  }));
+}
+
+// Get the video ID from the URL and timestamp from query params
+const { video_id } = Astro.params;
+const startTimeParam = Astro.url.searchParams.get("t");
+const startTime = startTimeParam ? parseInt(startTimeParam, 10) : undefined;
+
+// ビルド時は logger が定義されていない可能性があるため、try-catch で囲む
+try {
+  logger.log("Full URL =", Astro.url.toString());
+  logger.log("Search params =", Astro.url.search);
+  logger.log(
+    "All search params =",
+    Object.fromEntries(Astro.url.searchParams.entries())
+  );
+  logger.log("t param =", startTimeParam);
+  logger.log("startTime =", startTime);
+} catch (e) {
+  // ビルド時にエラーが発生した場合は無視
+}
+
+// Add a client-side script to check the URL and extract the timestamp
+const clientScript = `
+  document.addEventListener('DOMContentLoaded', () => {
+    // 環境変数を確認して開発環境でのみログを出力
+    const isDevelopment = ${import.meta.env.DEV};
+    
+    // debug ユーティリティをグローバルに定義
+    if (!window.debug) {
+      window.debug = {
+        log: function(...args) {
+          if (isDevelopment) {
+            console.log('[client:video]', ...args);
+          }
+        }
+      };
+    }
+    
+    // 開発環境でのみログを出力
+    if (isDevelopment) {
+      debug.log('Client-side script running');
+      debug.log('Current URL:', window.location.href);
+      debug.log('Search params:', window.location.search);
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const tParam = urlParams.get('t');
+      debug.log('t param from client-side:', tParam);
+      
+      if (tParam) {
+        debug.log('Timestamp found in URL:', tParam);
+      }
+    }
+  });
+`;
+
+// Import JSON files
+const artistsJson = await import("../../../public/artists.json");
+const songsJson = await import("../../../public/songs.json");
+
+// Process data
+const artists = artistsJson.artists as ArtistData[];
+const songs = songsJson.songs as SongData[];
+
+// Dynamically import all video JSON files
+const videoModules = import.meta.glob("../../../public/videos/*.json", {
+  eager: true,
+});
+const videos = Object.values(videoModules) as VideoData[];
+
+// Find the current video
+const currentVideo = videos.find((v) => v.video_id === video_id) || null;
+
+// Calculate song play counts
+const playCounts: Record<string, number> = {};
+videos.forEach((video) => {
+  video.timestamps.forEach((timestamp) => {
+    const songId = timestamp.song_id;
+    playCounts[songId] = (playCounts[songId] || 0) + 1;
+  });
+});
+
+// Enrich song data with artist names and play counts
+const enrichedSongs = songs.map((song) => {
+  // Handle multiple artist IDs
+  const artistNames = song.artist_ids
+    .map((id) => {
+      const artist = artists.find((a) => a.artist_id === id);
+      return artist ? artist.name : "";
+    })
+    .filter(Boolean); // Remove empty strings
+
+  return {
+    ...song,
+    artist_names: artistNames,
+    artist_name: artistNames.join(", ") || "-",
+    count: playCounts[song.song_id] || 0,
+  };
+});
+
+// Create artists map for the sidebar
+const artistsMap: Record<string, string> = {};
+artists.forEach((artist) => {
+  artistsMap[artist.artist_id] = artist.name;
+});
+
+// Enrich timestamps with song and artist info
+let enrichedTimestamps: Array<
+  VideoTimestamp & { song_title: string; artist_name: string }
+> = [];
+
+if (currentVideo) {
+  enrichedTimestamps = currentVideo.timestamps.map((timestamp) => {
+    const song = songs.find((s) => s.song_id === timestamp.song_id);
+
+    // Handle multiple artist IDs
+    let artistName = "-";
+    if (song && song.artist_ids && song.artist_ids.length > 0) {
+      const artistNames = song.artist_ids
+        .map((id) => {
+          const artist = artists.find((a) => a.artist_id === id);
+          return artist ? artist.name : "";
+        })
+        .filter(Boolean); // Remove empty strings
+
+      artistName = artistNames.length > 0 ? artistNames.join(", ") : "-";
+    }
+
+    return {
+      ...timestamp,
+      song_title: song?.title || "-",
+      artist_name: artistName,
+    };
+  });
+}
+---
+
+<PlayerLayout title="Video Player">
+  <Sidebar
+    slot="sidebar"
+    videos={videos}
+    songs={enrichedSongs}
+    artists={artistsMap}
+    client:load
+  />
+  <div class="space-y-4">
+    {
+      currentVideo ? (
+        <YouTubePlayer
+          videoId={video_id || ""}
+          timestamps={enrichedTimestamps}
+          startTime={startTime}
+          client:load
+        />
+      ) : (
+        <div class="aspect-video bg-gray-800 flex items-center justify-center text-white">
+          <p>Video not found</p>
+        </div>
+      )
+    }
+  </div>
+</PlayerLayout>
+
+<script set:html={clientScript} />

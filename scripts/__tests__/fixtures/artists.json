@@ -1,0 +1,44 @@
+{
+  "artists": [
+    {
+      "artist_id": "n5Hs-Jb4Q2z",
+      "name": "seiza",
+      "aliases": []
+    },
+    {
+      "artist_id": "U8vP-mK3R7t",
+      "name": "RADWIMPS",
+      "aliases": []
+    },
+    {
+      "artist_id": "2cT_xN6pL8s",
+      "name": "sasakure.UK",
+      "aliases": ["sasakure UK"]
+    },
+    {
+      "artist_id": "Qp6L-tM7gY2",
+      "name": "ヨルシカ",
+      "aliases": ["Yorushika"]
+    },
+    {
+      "artist_id": "kR8s-Jn3P5w",
+      "name": "れるりり",
+      "aliases": ["rerulili"]
+    },
+    {
+      "artist_id": "7bT_cW6vZ8x",
+      "name": "オーイシマサヨシ",
+      "aliases": ["Oishi Masayoshi"]
+    },
+    {
+      "artist_id": "dF2j-Kq9R5m",
+      "name": "Vaundy",
+      "aliases": []
+    },
+    {
+      "artist_id": "X3pG_7tL6Yw",
+      "name": "baker",
+      "aliases": []
+    }
+  ]
+}

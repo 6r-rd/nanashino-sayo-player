@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  # main ブランチへのプッシュ時に実行
+  push:
+    branches: [main]
+  # 手動実行のオプション
+  workflow_dispatch:
+
+# GITHUB_TOKEN のパーミッション設定
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時実行を1つに制限
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate videos list
+        run: node scripts/generateVideosList.js
+
+      - name: Extract repository name
+        id: repo-name
+        run: echo "REPO_NAME=$(echo $GITHUB_REPOSITORY | cut -d '/' -f 2)" >> $GITHUB_ENV
+
+      - name: Build
+        run: npm run build
+        env:
+          # リポジトリ名を環境変数として渡す
+          # Astro で import.meta.env からアクセスするために PUBLIC_ プレフィックスを付ける
+          PUBLIC_REPOSITORY_NAME: ${{ env.REPO_NAME }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
