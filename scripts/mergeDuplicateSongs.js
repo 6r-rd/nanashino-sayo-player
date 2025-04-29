@@ -6,6 +6,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Parse command line arguments
+const args = process.argv.slice(2);
+const dryRun = args.includes('--dry-run') || args.includes('-d');
+const artistId = args.includes('--artist-id') 
+  ? args[args.indexOf('--artist-id') + 1] 
+  : 'q3Me7gAkmpt'; // デフォルトは q3Me7gAkmpt
+
 // Read songs.json
 const songsPath = path.join(__dirname, '..', 'public', 'songs.json');
 const songsData = JSON.parse(fs.readFileSync(songsPath, 'utf8'));
@@ -29,11 +36,11 @@ songs.forEach(song => {
   }
 });
 
-// Check for duplicates where one has artist_id q3Me7gAkmpt and the other doesn't
+// Check for duplicates where one has specified artist_id and the other doesn't
 const validMergePairs = duplicates.filter(dup => {
-  const hasQ3Me = dup.songs[0].artist_ids.includes('q3Me7gAkmpt');
-  const hasQ3Me2 = dup.songs[1].artist_ids.includes('q3Me7gAkmpt');
-  return (hasQ3Me && !hasQ3Me2) || (!hasQ3Me && hasQ3Me2);
+  const hasArtist1 = dup.songs[0].artist_ids.includes(artistId);
+  const hasArtist2 = dup.songs[1].artist_ids.includes(artistId);
+  return (hasArtist1 && !hasArtist2) || (!hasArtist1 && hasArtist2);
 });
 
 console.log('Found ' + duplicates.length + ' duplicate titles:');
@@ -50,8 +57,8 @@ console.log('\n' + validMergePairs.length + ' valid merge pairs found:');
 validMergePairs.forEach(pair => {
   console.log('\nTitle: ' + pair.title);
   pair.songs.forEach((song, i) => {
-    const hasQ3Me = song.artist_ids.includes('q3Me7gAkmpt');
-    console.log('Song ' + (i+1) + ' (' + (hasQ3Me ? 'Record A' : 'Record B') + '):');
+    const hasArtist = song.artist_ids.includes(artistId);
+    console.log('Song ' + (i+1) + ' (' + (hasArtist ? 'Record A' : 'Record B') + '):');
     console.log('  song_id: ' + song.song_id);
     console.log('  artist_ids: ' + JSON.stringify(song.artist_ids));
   });
@@ -60,8 +67,8 @@ validMergePairs.forEach(pair => {
 // Create a map of song_ids to be replaced
 const songIdMap = new Map();
 validMergePairs.forEach(pair => {
-  const recordA = pair.songs.find(song => song.artist_ids.includes('q3Me7gAkmpt'));
-  const recordB = pair.songs.find(song => !song.artist_ids.includes('q3Me7gAkmpt'));
+  const recordA = pair.songs.find(song => song.artist_ids.includes(artistId));
+  const recordB = pair.songs.find(song => !song.artist_ids.includes(artistId));
   if (recordA && recordB) {
     songIdMap.set(recordA.song_id, recordB.song_id);
   }
@@ -114,38 +121,53 @@ affectedVideos.forEach(video => {
   });
 });
 
-// Perform the updates
+// Perform the updates if not in dry run mode
 if (validMergePairs.length > 0) {
-  // 1. Update songs.json - remove records with artist_id q3Me7gAkmpt
-  const songIdsToRemove = Array.from(songIdMap.keys());
-  songsData.songs = songsData.songs.filter(song => !songIdsToRemove.includes(song.song_id));
-  
-  // Write updated songs.json
-  fs.writeFileSync(songsPath, JSON.stringify(songsData, null, 2));
-  console.log('\nUpdated songs.json - removed ' + songIdsToRemove.length + ' duplicate records');
-  
-  // 2. Update video files
-  let updatedVideoCount = 0;
-  affectedVideos.forEach(video => {
-    let updated = false;
+  if (dryRun) {
+    console.log('\n[DRY RUN] No changes were made. Summary of what would happen:');
+    console.log(`- Would remove ${songIdMap.size} duplicate records from songs.json`);
+    console.log(`- Would update ${affectedVideos.length} video files`);
+    console.log(`- Total references that would be updated: ${affectedVideos.reduce((sum, video) => sum + video.references.length, 0)}`);
+  } else {
+    // 1. Update songs.json - remove records with specified artist_id
+    const songIdsToRemove = Array.from(songIdMap.keys());
+    songsData.songs = songsData.songs.filter(song => !songIdsToRemove.includes(song.song_id));
     
-    // Update timestamps
-    video.data.timestamps.forEach(timestamp => {
-      if (songIdMap.has(timestamp.song_id)) {
-        timestamp.song_id = songIdMap.get(timestamp.song_id);
-        updated = true;
+    // Write updated songs.json
+    fs.writeFileSync(songsPath, JSON.stringify(songsData, null, 2));
+    
+    // 2. Update video files
+    let updatedVideoCount = 0;
+    let totalReferencesUpdated = 0;
+    
+    affectedVideos.forEach(video => {
+      let updated = false;
+      let referencesUpdated = 0;
+      
+      // Update timestamps
+      video.data.timestamps.forEach(timestamp => {
+        if (songIdMap.has(timestamp.song_id)) {
+          timestamp.song_id = songIdMap.get(timestamp.song_id);
+          updated = true;
+          referencesUpdated++;
+        }
+      });
+      
+      if (updated) {
+        // Write updated video file
+        fs.writeFileSync(video.path, JSON.stringify(video.data, null, 2));
+        updatedVideoCount++;
+        totalReferencesUpdated += referencesUpdated;
       }
     });
     
-    if (updated) {
-      // Write updated video file
-      fs.writeFileSync(video.path, JSON.stringify(video.data, null, 2));
-      updatedVideoCount++;
-    }
-  });
-  
-  console.log(`Updated ${updatedVideoCount} video files`);
-  console.log('\nTask completed successfully!');
+    console.log('\n===== SUMMARY =====');
+    console.log(`- Removed ${songIdsToRemove.length} duplicate records from songs.json`);
+    console.log(`- Updated ${updatedVideoCount} video files`);
+    console.log(`- Total references updated: ${totalReferencesUpdated}`);
+    console.log('===================');
+    console.log('\nTask completed successfully!');
+  }
 } else {
   console.log('\nNo valid merge pairs found. No updates performed.');
 }

@@ -14,6 +14,8 @@
     "link-artists": "node scripts/linkArtists.js",
     "validate-json": "node scripts/validateJsonSchemas.js",
     "destroy": "node scripts/destroy.js",
+    "merge-duplicates": "node scripts/mergeDuplicateSongs.js",
+    "merge-duplicates:dry": "node scripts/mergeDuplicateSongs.js --dry-run",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
