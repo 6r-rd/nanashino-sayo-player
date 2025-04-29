@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 
 // リポジトリ名を取得（GitHub Pages のベースパスとして使用）
 // 環境変数から取得するか、デフォルト値を使用
-const REPO_NAME = import.meta.env.PUBLIC_REPOSITORY_NAME || 'etosora-player';
+const REPO_NAME = import.meta.env.PUBLIC_REPOSITORY_NAME || 'nanashino-sayo-player';
 
 // https://astro.build/config
 export default defineConfig({
