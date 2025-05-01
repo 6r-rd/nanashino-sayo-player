@@ -1,6 +1,10 @@
 {
   "artists": [
     {
+      "artist_id": "irSwKLQP04X",
+      "name": "七篠さよ"
+    },
+    {
       "artist_id": "q3Me7gAkmpt",
       "name": ""
     },
@@ -186,7 +190,8 @@
     },
     {
       "artist_id": "j9FgW7zH6-y",
-      "name": "電ポルP"
+      "name": "電ポルP",
+      "aliases": ["koyori"]
     },
     {
       "artist_id": "2i9pP-flU1e",
@@ -339,6 +344,10 @@
     {
       "artist_id": "hYA7W3CIFPn",
       "name": "ワルキューレ"
+    },
+    {
+      "artist_id": "mLNLCz7C6aj",
+      "name": "AKINO from bless4"
     },
     {
       "artist_id": "R9pg1Zl4H2o",
@@ -527,6 +536,1123 @@
     {
       "artist_id": "MCjTACxlfZm",
       "name": "Vaundy"
+    },
+    {
+      "artist_id": "_efaJMz-k_O",
+      "name": "東京事変"
+    },
+    {
+      "artist_id": "UVkfUP_an0V",
+      "name": "King Gnu"
+    },
+    {
+      "artist_id": "UAz0j9ZL4ju",
+      "name": "緑黄色社会"
+    },
+    {
+      "artist_id": "cGXiqiZUAYr",
+      "name": "新しい学校のリーダーズ"
+    },
+    {
+      "artist_id": "8tsKEr9cmrX",
+      "name": "星野源"
+    },
+    {
+      "artist_id": "BIqQHy4_yUR",
+      "name": "菅田将暉"
+    },
+    {
+      "artist_id": "eA6Vrl_Lu25",
+      "name": "フレデリック"
+    },
+    {
+      "artist_id": "Fu15N-k-rg2",
+      "name": "ヒグチアイ"
+    },
+    {
+      "artist_id": "WtoMArDOLck",
+      "name": "yama"
+    },
+    {
+      "artist_id": "Jv9bCDxoajC",
+      "name": "スキマスイッチ"
+    },
+    {
+      "artist_id": "oA6KqRrYaMl",
+      "name": "BUMP OF CHICKEN"
+    },
+    {
+      "artist_id": "j8gGIWJEKWa",
+      "name": "milet×MAN WITH A MISSION"
+    },
+    {
+      "artist_id": "wPCQJ54NGtp",
+      "name": "ヤバイTシャツ屋さん"
+    },
+    {
+      "artist_id": "edt0v9vxtA8",
+      "name": "レキシ"
+    },
+    {
+      "artist_id": "lUZpqa118kh",
+      "name": "UNISON SQUARE GARDEN"
+    },
+    {
+      "artist_id": "nIIlblJXRJh",
+      "name": "星街すいせい"
+    },
+    {
+      "artist_id": "Y0q6hiTENFQ",
+      "name": "tuki."
+    },
+    {
+      "artist_id": "PRlr9-mkfR6",
+      "name": "クリープハイプ"
+    },
+    {
+      "artist_id": "kLUMcJDwWhM",
+      "name": "友成空"
+    },
+    {
+      "artist_id": "xjuN8GAEdRH",
+      "name": "ONE OK ROCK"
+    },
+    {
+      "artist_id": "Gi-IgqHE2AB",
+      "name": "［Alexandros］"
+    },
+    {
+      "artist_id": "WTLY1PYLwCg",
+      "name": "MonsterZ MATE"
+    },
+    {
+      "artist_id": "rM_WsOxYVaU",
+      "name": "羊文学"
+    },
+    {
+      "artist_id": "Y751jupXkqf",
+      "name": "Ayase"
+    },
+    {
+      "artist_id": "Os6RKW0TZYM",
+      "name": "yui×ミゾベリョウ"
+    },
+    {
+      "artist_id": "NIExFVtSJ9I",
+      "name": "高橋洋子"
+    },
+    {
+      "artist_id": "wl7Ffiw5hdh",
+      "name": "GEMN"
+    },
+    {
+      "artist_id": "uG_G8rqwqB9",
+      "name": "SUPER BEAVER"
+    },
+    {
+      "artist_id": "I2jFO5hFI4m",
+      "name": "sumika"
+    },
+    {
+      "artist_id": "KefkdE79PRf",
+      "name": "高橋優"
+    },
+    {
+      "artist_id": "oyF1ZN-hLJY",
+      "name": "柴咲コウ"
+    },
+    {
+      "artist_id": "AofrbjsOS91",
+      "name": "林原めぐみ"
+    },
+    {
+      "artist_id": "KCtIFm7D2Ym",
+      "name": "BaseBallBear"
+    },
+    {
+      "artist_id": "nW-gLE2EmHb",
+      "name": "Galileo Galilei"
+    },
+    {
+      "artist_id": "4dR878gnPEf",
+      "name": "藍坊主"
+    },
+    {
+      "artist_id": "b2fVgeSkLQJ",
+      "name": "SHISHAMO"
+    },
+    {
+      "artist_id": "W7yFf2JqZBc",
+      "name": "高田梢枝"
+    },
+    {
+      "artist_id": "yJeilILM-AD",
+      "name": "日食なつこ"
+    },
+    {
+      "artist_id": "Dv5FjTvsG5h",
+      "name": "フジファブリック"
+    },
+    {
+      "artist_id": "wDzI2s1MqJC",
+      "name": "日向電工"
+    },
+    {
+      "artist_id": "uGhFgObFrN2",
+      "name": "Kanaria"
+    },
+    {
+      "artist_id": "YLqgQFq_1vO",
+      "name": "ゆうゆ"
+    },
+    {
+      "artist_id": "7XXA0X3xTGH",
+      "name": "Yukopi"
+    },
+    {
+      "artist_id": "sk01HW-NyfT",
+      "name": "DECO*27"
+    },
+    {
+      "artist_id": "-jAPeCQLunt",
+      "name": "Junky"
+    },
+    {
+      "artist_id": "ILB2Ru-FLYS",
+      "name": "Dixie Flatline"
+    },
+    {
+      "artist_id": "smu_7AxJDsH",
+      "name": "柊マグネタイト"
+    },
+    {
+      "artist_id": "zPj5zmveYHM",
+      "name": "Nem"
+    },
+    {
+      "artist_id": "UVzE13QrfIu",
+      "name": "ジミーサムP"
+    },
+    {
+      "artist_id": "rI1A1741EWc",
+      "name": "T-POCKET"
+    },
+    {
+      "artist_id": "2r0aX1g3v4E",
+      "name": "Omoinotake"
+    },
+    {
+      "artist_id": "2aX0g1q3r7E",
+      "name": "なとり"
+    },
+    {
+      "artist_id": "A1F74sMADbe",
+      "name": "音田雅則"
+    },
+    {
+      "artist_id": "7D213Q7Ei-I",
+      "name": "MAISONdes"
+    },
+    {
+      "artist_id": "B9sh0NKEcGA",
+      "name": "かいりきベア"
+    },
+    {
+      "artist_id": "_Prr7WkBx0Y",
+      "name": "弌誠"
+    },
+    {
+      "artist_id": "Z3j9RhG6IRV",
+      "name": "supercell"
+    },
+    {
+      "artist_id": "KIVGdD_o8OO",
+      "name": "DEEN"
+    },
+    {
+      "artist_id": "Pwqhfjr0K6g",
+      "name": "倉木麻衣"
+    },
+    {
+      "artist_id": "okr6XU9VeYq",
+      "name": "GARNET CROW"
+    },
+    {
+      "artist_id": "kQbUCu4LbOy",
+      "name": "宇徳敬子"
+    },
+    {
+      "artist_id": "XHZibJF-4Ro",
+      "name": "THE BACK HORN"
+    },
+    {
+      "artist_id": "5akoxVff7ln",
+      "name": "BLUE ENCOUNT"
+    },
+    {
+      "artist_id": "Xdd6rCEUSWo",
+      "name": "MY FIRST STORY"
+    },
+    {
+      "artist_id": "lLtKte_JUO4",
+      "name": "HYDE"
+    },
+    {
+      "artist_id": "BT_cjEe4LVJ",
+      "name": "THE ORAL CIGARETTES"
+    },
+    {
+      "artist_id": "GMcUVvMSpv6",
+      "name": "cinema staff"
+    },
+    {
+      "artist_id": "iBT7o931Jxe",
+      "name": "KEYTALK"
+    },
+    {
+      "artist_id": "kEJC5EPVayz",
+      "name": "YUI"
+    },
+    {
+      "artist_id": "4dy6cgSFf_F",
+      "name": "千綿偉功"
+    },
+    {
+      "artist_id": "NZUalSHl5g5",
+      "name":  "宮崎歩"
+    },
+    {
+      "artist_id": "9nQv9OCDTWJ",
+      "name": "Every Little Thing"
+    },
+    {
+      "artist_id": "2Wqz639tut-",
+      "name": "高橋瞳"
+    },
+    {
+      "artist_id": "IpbRuaZjn3a",
+      "name": "DOES"
+    },
+    {
+      "artist_id": "DtaioTNUr_7",
+      "name": "NIRGILIS"
+    },
+    {
+      "artist_id": "Db64UDhGT6n",
+      "name": "鈴木このみ"
+    },
+    {
+      "artist_id": "IdMCqnF5vXI",
+      "name": "SCHOOL FOOD PUNISHMENT"
+    },
+    {
+      "artist_id": "oKaAQ0Wo1K2",
+      "name": "Sowelu"
+    },
+    {
+      "artist_id": "5wejBmTYL34",
+      "name": "奥井雅美"
+    },
+    {
+      "artist_id": "YiDB0MrJyJY",
+      "name": "水樹奈々"
+    },
+    {
+      "artist_id": "vb67AiLIvVj",
+      "name": "No No Girls"
+    },
+    {
+      "artist_id": "qc_23OvHiWr",
+      "name": "オーイシマサヨシ"
+    },
+    {
+      "artist_id": "VcCG6GgaxFm",
+      "name": "timelesz",
+      "aliases": ["Sexy Zone"]
+    },
+    {
+      "artist_id": "GTkGAaRaEUV",
+      "name": "Perfume"
+    },
+    {
+      "artist_id": "di0wCW7LkR5",
+      "name": "TK from 凛として時雨"
+    },
+    {
+      "artist_id": "G6i7GSoarqZ",
+      "name": "UVERworld"
+    },
+    {
+      "artist_id": "bobtcdqDE6g",
+      "name": "GARNiDELiA"
+    },
+    {
+      "artist_id": "-GcItHTv2go",
+      "name": "幾田りら"
+    },
+    {
+      "artist_id": "Ma6KF7uNaq2",
+      "name": "little by little"
+    },
+    {
+      "artist_id": "aqB4b9KkcqQ",
+      "name": "中川翔子"
+    },
+    {
+      "artist_id": "BpOtCK1oNNX",
+      "name": "レミオロメン"
+    },
+    {
+      "artist_id": "MMaXkA6yYjm",
+      "name": "CHEMISTRY"
+    },
+    {
+      "artist_id": "QiU3PwRXb0y",
+      "name": "スピッツ"
+    },
+    {
+      "artist_id": "B5dZ0ofur1L",
+      "name": "松任谷由実",
+      "aliases": ["松任谷由実(荒井由実)"]
+    },
+    {
+      "artist_id": "acJBWiF2jjQ",
+      "name": "YeLLOW Generation"
+    },
+    {
+      "artist_id": "FiNbue83rxu",
+      "name": "Crystal Kay"
+    },
+    {
+      "artist_id": "oXNZQogoei-",
+      "name": "アンダーグラフ"
+    },
+    {
+      "artist_id": "NG82bEQbsFm",
+      "name": "Akeboshi"
+    },
+    {
+      "artist_id": "kB8BHikA0uF",
+      "name": "種田梨沙"
+    },
+    {
+      "artist_id": "JQwHT76Vg84",
+      "name": "ユアネス"
+    },
+    {
+      "artist_id": "w-A0cHSKMJz",
+      "name": "木村カエラ"
+    },
+    {
+      "artist_id": "0dpPzgfQRd3",
+      "name": "OLIVIA",
+      "aliases": ["OLIVIA inspi' REIRA (TRAPNEST)"]
+    },
+    {
+      "artist_id": "9BFpAMo4qqJ",
+      "name": "土屋アンナ",
+      "aliases": ["ANNA inspi' NANA(BLACK STONES)"]
+    },
+    {
+      "artist_id": "0bYPuzyZEm_",
+      "name": "ジン"
+    },
+    {
+      "artist_id": "UNFImDP2DUX",
+      "name": "シギ"
+    },
+    {
+      "artist_id": "s1oaIsGnuhR",
+      "name": "Folder5"
+    },
+    {
+      "artist_id": "3AbaTF8hYtI",
+      "name": "昆夏美&山崎育三郎"
+    },
+    {
+      "artist_id": "NHGRzAgwfZG",
+      "name": "AI"
+    },
+    {
+      "artist_id": "LtclBYJBjvv",
+      "name": "倖田來未"
+    },
+    {
+      "artist_id": "w-vt8H0eE0_",
+      "name": "BON-BON BLANCO"
+    },
+    {
+      "artist_id": "TCAm5HuqA0h",
+      "name": "Anly"
+    },
+    {
+      "artist_id": "4Zmn1N-7SgW",
+      "name": "nano.RIPE"
+    },
+    {
+      "artist_id": "WU226uDdZci",
+      "name": "buzzG"
+    },
+    {
+      "artist_id": "FMnVU79uxTA",
+      "name": "MISIA"
+    },
+    {
+      "artist_id": "_Ga5l1GgyQL",
+      "name": "JUJU"
+    },
+    {
+      "artist_id": "vPlZwvLCSlt",
+      "name": "伊織"
+    },
+    {
+      "artist_id": "JwFUhVjXbMB",
+      "name": "ROSÉ"
+    },
+    {
+      "artist_id": "AoEoEOM2dF6",
+      "name": "Bruno Mars"
+    },
+    {
+      "artist_id": "LHgQgsmagAc",
+      "name": "れるりり"
+    },
+    {
+      "artist_id": "AABZ5NcmW8L",
+      "name": "こっちのけんと"
+    },
+    {
+      "artist_id": "brt23m48h8V",
+      "name": "μ's"
+    },
+    {
+      "artist_id": "0ctJQyxtnhw",
+      "name": "Boa"
+    },
+    {
+      "artist_id": "w4HeGBIS4jk",
+      "name": "広瀬香美"
+    },
+    {
+      "artist_id": "kVVgG1NLate",
+      "name": "桑田佳祐"
+    },
+    {
+      "artist_id": "-INrlR23Eia",
+      "name": "back number"
+    },
+    {
+      "artist_id": "oVCkFXfjuM0",
+      "name": "槇原敬之"
+    },
+    {
+      "artist_id": "aO5KJLRKc_8",
+      "name": "ROCKY CHACK"
+    },
+    {
+      "artist_id": "tb5dh5palU7",
+      "name": "清浦夏実"
+    },
+    {
+      "artist_id": "BwZLOcrHbJZ",
+      "name": "チャットモンチー"
+    },
+    {
+      "artist_id": "KgCKTywK2Bf",
+      "name": "ゴスペラーズ"
+    },
+    {
+      "artist_id": "KDATwmFWCl7",
+      "name": "EXILE"
+    },
+    {
+      "artist_id": "wRECNAc3YCk",
+      "name": "Annabel"
+    },
+    {
+      "artist_id": "YWUEbrA0rOl",
+      "name": "STEREO DIVE FOUNDATION"
+    },
+    {
+      "artist_id": "M5YM6KBzSBm",
+      "name": "佐藤利奈"
+    },
+    {
+      "artist_id": "l5NLyvbRrEA",
+      "name": "井上麻里奈"
+    },
+    {
+      "artist_id": "vbbQqXOVHFm",
+      "name": "ChouCho"
+    },
+    {
+      "artist_id": "Gn27GYDTDC8",
+      "name": "鈴村健一"
+    },
+    {
+      "artist_id": "U8vKBg_pOHm",
+      "name": "やくしまるえつこメトロオーケストラ"
+    },
+    {
+      "artist_id": "EmXNYui2FIC",
+      "name": "TiA"
+    },
+    {
+      "artist_id": "IoxZlT9LSDm",
+      "name": "androp"
+    },
+    {
+      "artist_id": "_M2VGgySJdy",
+      "name": "高橋洋子"
+    },
+    {
+      "artist_id": "FH_aVH6jg_Z",
+      "name": "皆谷尚美"
+    },
+    {
+      "artist_id": "nyHBYw8H5sx",
+      "name": "CHAKA"
+    },
+    {
+      "artist_id": "bx2yvSc_3zz",
+      "name": "KOTOKO"
+    },
+    {
+      "artist_id": "6YujuhT2tq-",
+      "name": "TAKU INOUE"
+    },
+    {
+      "artist_id": "HW4Oz6_88kc",
+      "name": "10-FEET"
+    },
+    {
+      "artist_id": "u-c2Jutxrhr",
+      "name": "ストレイテナー"
+    },
+    {
+      "artist_id": "Yxdt_dDZIEJ",
+      "name": "PUFFY"
+    },
+    {
+      "artist_id": "VG0WkHwiPPY",
+      "name": "SAYURI",
+      "aliases": ["石川さゆり"]
+    },
+    {
+      "artist_id": "jdam8sNROpU",
+      "name": "w-inds"
+    },
+    {
+      "artist_id": "PSBZFBgDwq5",
+      "name": "Do As Infinity"
+    },
+    {
+      "artist_id": "8S9B2ld3Omw",
+      "name": "BONNIE PINK"
+    },
+    {
+      "artist_id": "3HoXESmaSFz",
+      "name": "前田愛"
+    },
+    {
+      "artist_id": "nd4xfrnQeyC",
+      "name": "エルセとさめのぽき"
+    },
+    {
+      "artist_id": "jrinzyRpW33",
+      "name": "岡崎律子"
+    },
+    {
+      "artist_id": "nSEAIZSRWgI",
+      "name": "多田葵"
+    },
+    {
+      "artist_id": "GpyLv-z30Ka",
+      "name": "ナノウ",
+      "aliases": ["ほえほえP"]
+    },
+    {
+      "artist_id": "1UfgCBEJhVq",
+      "name": "サンボマスター"
+    },
+    {
+      "artist_id": "OAX1Owbnl_l",
+      "name": "ELLEGARDEN"
+    },
+    {
+      "artist_id": "7z8hbhzwlGG",
+      "name": "FEEL SO BAD"
+    },
+    {
+      "artist_id": "i0aKCwccu9f",
+      "name": "ano"
+    },
+    {
+      "artist_id": "ueITtkjVDrM",
+      "name": "吉岡亜衣加"
+    },
+    {
+      "artist_id": "8fkA0or2i7H",
+      "name": "斎藤千和"
+    },
+    {
+      "artist_id": "RznpbyWYvEU",
+      "name": "井口裕香"
+    },
+    {
+      "artist_id": "hT3YvIyWyqS",
+      "name": "石田よう子"
+    },
+    {
+      "artist_id": "sEnvLc_ebPu",
+      "name": "海月シェル"
+    },
+    {
+      "artist_id": "1t55NA0nbOs",
+      "name": "DAOKO"
+    },
+    {
+      "artist_id": "pyrfg0jvBMW",
+      "name": "Mr.Children"
+    },
+    {
+      "artist_id": "vc4BUqc5Ydq",
+      "name": "Girls Dead Monster"
+    },
+    {
+      "artist_id": "7J2mSYEbQf9",
+      "name": "角巻わため"
+    },
+    {
+      "artist_id": "A9pBrfeZYSM",
+      "name": "GRANRODEO"
+    },
+    {
+      "artist_id": "aTIfb0EG48W",
+      "name": "milet"
+    },
+    {
+      "artist_id": "gbV103d0G_i",
+      "name": "日向めぐみ"
+    },
+    {
+      "artist_id": "R_rzbnfQgqO",
+      "name": "アゴアニキ"
+    },
+    {
+      "artist_id": "BvkEsHe8fH9",
+      "name": "EasyPop"
+    },
+    {
+      "artist_id": "0QODcGa26f3",
+      "name": "ヴィレッジ・シンガーズ"
+    },
+    {
+      "artist_id": "eAepus4p8dz",
+      "name": "久保田早紀"
+    },
+    {
+      "artist_id": "uIAIdPHsgJQ",
+      "name": "ピンク・レディー"
+    },
+    {
+      "artist_id": "Y-6wl0S9Pd4",
+      "name": "キャンディーズ"
+    },
+    {
+      "artist_id": "tbjrypewSwP",
+      "name": "山口百恵"
+    },
+    {
+      "artist_id": "ZC3xA_rpGMH",
+      "name": "TM NETWORK"
+    },
+    {
+      "artist_id": "xXzJ_c8Fa5o",
+      "name": "NEWS"
+    },
+    {
+      "artist_id": "_dz8gIcOCGU",
+      "name": "矢島美容室"
+    },
+    {
+      "artist_id": "0ChGBO3PL5r",
+      "name": "はっぱ隊"
+    },
+    {
+      "artist_id": "1jVi6XyfAnc",
+      "name": "慎吾ママ",
+      "aliases": ["香取慎吾"]
+    },
+    {
+      "artist_id": "0wL-9wW5rHW",
+      "name": "ブラックビスケッツ"
+    },
+    {
+      "artist_id": "9vkFjBpVjBn",
+      "name": "モーニング娘。"
+    },
+    {
+      "artist_id": "z3pndliIpMX",
+      "name": "SUEMITSU & THE SUEMITH"
+    },
+    {
+      "artist_id": "l77JU9imNMe",
+      "name": "さかいゆう"
+    },
+    {
+      "artist_id": "QWKYJOTvyHz",
+      "name": "小松未歩"
+    },
+    {
+      "artist_id": "ead8BzyrLRb",
+      "name": "ZARD"
+    },
+    {
+      "artist_id": "hdUksq7OZr5",
+      "name": "愛内里菜"
+    },
+    {
+      "artist_id": "kvzjysQFPez",
+      "name": "T.M.Revolution"
+    },
+    {
+      "artist_id": "9-tps0nX9qt",
+      "name": "木村弓"
+    },
+    {
+      "artist_id": "ddDTEUpd39u",
+      "name": "手嶌葵"
+    },
+    {
+      "artist_id": "X7iFJcgor9N",
+      "name": "井上あずみ"
+    },
+    {
+      "artist_id": "Y-E32zuXwFM",
+      "name": "つじあやの"
+    },
+    {
+      "artist_id": "-3OLP5oqUP5",
+      "name": "本名陽子"
+    },
+    {
+      "artist_id": "e8fOw8l6edt",
+      "name": "一青窈"
+    },
+    {
+      "artist_id": "f_8rRgqq_GY",
+      "name": "伊藤由奈"
+    },
+    {
+      "artist_id": "LntDCt8L5Yi",
+      "name": "柴矢裕美"
+    },
+    {
+      "artist_id": "u16pCaeTZqj",
+      "name": "SCANDAL"
+    },
+    {
+      "artist_id": "dTVWtjOGVG_",
+      "name": "諫山実生"
+    },
+    {
+      "artist_id": "r2EDoK1gLAD",
+      "name": "SPEED"
+    },
+    {
+      "artist_id": "aRUcBvYO9Ll",
+      "name": "GReeeeN"
+    },
+    {
+      "artist_id": "947DrIS4gkd",
+      "name": "サスケ"
+    },
+    {
+      "artist_id": "iq-5xMFVQbn",
+      "name": "ケツメイシ"
+    },
+    {
+      "artist_id": "N1tBXM72y9X",
+      "name": "光永亮太"
+    },
+    {
+      "artist_id": "Op8-4IuxZiW",
+      "name": "田村ゆかり"
+    },
+    {
+      "artist_id": "3puaNvvrEiD",
+      "name": "宝鐘マリン"
+    },
+    {
+      "artist_id": "YKXY7M-mdDo",
+      "name": "麻帆良学園中等部2-A"
+    },
+    {
+      "artist_id": "EzA3s5bosDm",
+      "name": "BEAT CRUSADERS"
+    },
+    {
+      "artist_id": "RJeS0fzurPT",
+      "name": "NICO Touches the Walls"
+    },
+    {
+      "artist_id": "clO12-kPGXN",
+      "name": "mihimaru GT"
+    },
+    {
+      "artist_id": "rmzYJ2dR6ZV",
+      "name": "しぐれうい"
+    },
+    {
+      "artist_id": "31PnB4NjiPC",
+      "name": "9nine"
+    },
+    {
+      "artist_id": "1VwjYfgRA28",
+      "name": "黒うさP"
+    },
+    {
+      "artist_id": "Hi-XBdoQs1j",
+      "name": "音御光歌"
+    },
+    {
+      "artist_id": "-3YQLcTQEe-",
+      "name": "都古なつ"
+    },
+    {
+      "artist_id": "h0GyMTPVBm_",
+      "name": "結イ"
+    },
+    {
+      "artist_id": "gYVvj0yk5N4",
+      "name": "曇音ルカ"
+    },
+    {
+      "artist_id": "IOk1F2i77vd",
+      "name": "海深シイラ"
+    },
+    {
+      "artist_id": "nL_VAOR9Nrx",
+      "name": "はくゆ"
+    },
+    {
+      "artist_id": "MBbjYHXBuIQ",
+      "name": "久遠なつめ"
+    },
+    {
+      "artist_id": "KDYXMgvNn4M",
+      "name": "歌与ポメ"
+    },
+    {
+      "artist_id": "dy66V_-pqHN",
+      "name": "ラマーズP"
+    },
+    {
+      "artist_id": "vzTZ_X4BAD7",
+      "name": "すりぃ"
+    },
+    {
+      "artist_id": "ziO9CiKwXaf",
+      "name": "wowaka"
+    },
+    {
+      "artist_id": "bxi3HaHnXH2",
+      "name": "ピノキオピー"
+    },
+    {
+      "artist_id": "239JeF-QBhv",
+      "name": "Chinozo"
+    },
+    {
+      "artist_id": "T6Be_3gs1cD",
+      "name": "Ray"
+    },
+    {
+      "artist_id": "PQloQ0VLTXp",
+      "name": "HY"
+    },
+    {
+      "artist_id": "nFmKH6oVv6Q",
+      "name": "瑛人"
+    },
+    {
+      "artist_id": "gwp8TrGYES4",
+      "name": "R-指定"
+    },
+    {
+      "artist_id": "cOvT7tdwHoC",
+      "name": "day after tomorrow"
+    },
+    {
+      "artist_id": "u4D2Q44YQ5m",
+      "name": "MONGOL800"
+    },
+    {
+      "artist_id": "qvR2WQ5s2Yj",
+      "name": "郷ひろみ"
+    },
+    {
+      "artist_id": "4EcjtiqOSeJ",
+      "name": "JUDY AND MARY"
+    },
+    {
+      "artist_id": "wCbWTCfmJFk",
+      "name": "04 Limited Sazabys"
+    },
+    {
+      "artist_id": "GMKYL3LmHzX",
+      "name": "布施明"
+    },
+    {
+      "artist_id": "7UJEfjc_pvU",
+      "name": "Whiteberry"
+    },
+    {
+      "artist_id": "9NEJnnUFX_p",
+      "name": "TOKIO"
+    },
+    {
+      "artist_id": "D9FRWag-NZo",
+      "name": "湘南乃風"
+    },
+    {
+      "artist_id": "x6J8LjUSXUm",
+      "name": "藤井隆"
+    },
+    {
+      "artist_id": "4zqRdZ_QMZF",
+      "name": "ダイアモンド☆ユカイ"
+    },
+    {
+      "artist_id": "JBSpz1upGJM",
+      "name": "FictionJunction"
+    },
+    {
+      "artist_id": "uSSaF6bAjvw",
+      "name": "タイナカサチ"
+    },
+    {
+      "artist_id": "muEPOB9BuJd",
+      "name": "sasakure.UK"
+    },
+    {
+      "artist_id": "TUqynEMzQ_n",
+      "name": "玉置浩二"
+    },
+    {
+      "artist_id": "wXw6DtUP12E",
+      "name": "L'Arc~en~Ciel"
+    },
+    {
+      "artist_id": "2DI6eMUtRpJ",
+      "name": "中島みゆき"
+    },
+    {
+      "artist_id": "lPzzO3jo0dJ",
+      "name": "飯島真理"
+    },
+    {
+      "artist_id": "BZmEclCC7K_",
+      "name": "I WiSH"
+    },
+    {
+      "artist_id": "BLF4ce7fGbf",
+      "name": "Vanessa Carlton"
+    },
+    {
+      "artist_id": "JObp6RaL0Ki",
+      "name": "やくしまるえつこ"
+    },
+    {
+      "artist_id": "iTCugvXP71h",
+      "name": "戸松遥"
+    },
+    {
+      "artist_id": "ilup8OZGUxO",
+      "name": "矢島晶子"
+    },
+    {
+      "artist_id": "p0NOypN7Ihf",
+      "name": "癒月"
+    },
+    {
+      "artist_id": "mRoPtNOkZLt",
+      "name": "DAI"
+    },
+    {
+      "artist_id": "bLOsV5236PT",
+      "name": "串田アキラ"
+    },
+    {
+      "artist_id": "Pt6WFZ2BQsT",
+      "name": "PRINCESS PRINCESS",
+      "aliases": ["プリンセス プリンセス"]
+    },
+    {
+      "artist_id": "Y_t4iSY31Pa",
+      "name": "チーム“ハナヤマタ”"
+    },
+    {
+      "artist_id": "ZMH_hJnR6gg",
+      "name": "Rita"
+    },
+    {
+      "artist_id": "oNI9oV1etJW",
+      "name": "森山直太朗"
+    },
+    {
+      "artist_id": "dUUTxE_TR-l",
+      "name": "femme fatale"
+    },
+    {
+      "artist_id": "HQtaxpaCjFE",
+      "name": "samfree"
+    },
+    {
+      "artist_id": "upH6uddqBEL",
+      "name": "平井堅"
+    },
+    {
+      "artist_id": "Ag2YfNGVj5x",
+      "name": "SixTONES"
+    },
+    {
+      "artist_id": "_xQBG_ZXOIM",
+      "name": "AKB48"
+    },
+    {
+      "artist_id": "7JM0kN5UhNF",
+      "name": "kz-livetune"
+    },
+    {
+      "artist_id": "RX4xJDDwWX2",
+      "name": "流星P",
+      "aliases": ["minato", "湊貴大"]
+    },
+    {
+      "artist_id": "-gOM8XC4242",
+      "name": "川田まみ"
+    },
+    {
+      "artist_id": "IVYbhBEPnEq",
+      "name": "iroha"
+    },
+    {
+      "artist_id": "t3Ozn24m1Az",
+      "name": "のりP"
+    },
+    {
+      "artist_id": "n8MdbekWxvW",
+      "name": "北出菜奈"
+    },
+    {
+      "artist_id": "jPG-Tw3dK0S",
+      "name": "ぼーかりおどP"
+    },
+    {
+      "artist_id": "",
+      "name": ""
     }
   ]
 }
