@@ -1,12 +1,11 @@
 # Nanashino Sayo player
 
-Vsinger「[七篠さよ](https://www.youtube.com/@etosora)」による YouTube ライブ配信のアーカイブ動画を再生するための非公式 Web サイトとその運用ツールです。[EtoSora player](https://github.com/6r-rd/etosora-player) をテンプレートとして作成しています。
+Vsinger「[七篠さよ](https://www.youtube.com/@nanasayo09)」による YouTube ライブ配信のアーカイブ動画を再生するための非公式 Web サイトとその運用ツールです。[EtoSora player](https://github.com/6r-rd/etosora-player) をテンプレートとして作成しています。
 
 Demo: https://6r-rd.github.io/nanashino-sayo-player/
 
-![PlayerImage](https://github.com/user-attachments/assets/c61044eb-6371-4e2c-acb4-c1cd6e1d172e)
-
-![Songs Image](https://github.com/user-attachments/assets/6f02fd3a-40e8-45b2-b523-92845dd63676)
+![Player Image](https://github.com/user-attachments/assets/abf0e3f1-3dfa-45aa-91a9-ed1704e67107)
+![Songs Image](https://github.com/user-attachments/assets/e88184d6-a26e-4d19-9cb8-7d90f2631c86)
 
 ## 主な機能
 
@@ -151,8 +150,6 @@ GitHub Actions で配信データを取得した後、`public/` 以下の JSON �
 
 `description` がある場合、ユーザーが info アイコンにマウスオーバーした際に popover を表示します。popover をクリックすると description に最初に記載された URL を開きます。
 
-![Image](https://github.com/user-attachments/assets/0ee164af-a847-49a4-9608-8631c2991286)
-
 ### artists.json
 
 `artists.json` ファイルは、全てのアーティスト情報を含みます。
@@ -194,5 +191,3 @@ GitHub Actions で配信データを取得した後、`public/` 以下の JSON �
 ```
 
 `description` がある場合、ユーザーが info アイコンにマウスオーバーした際に popover を表示します。popover をクリックすると description に最初に記載された URL を開きます。
-
-![Image](https://github.com/user-attachments/assets/30fa6752-4850-471d-b617-94c88dda1858)
