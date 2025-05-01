@@ -3,5 +3,41 @@
   "title": "【＃ポメラニアンスター】あの夏が再び！ロックしようぜ！歌枠【#ポメスタだれろく＃Vtuber ＃歌枠】",
   "start_datetime": "2025-02-18T15:29:27Z",
   "thumbnail_url": "https://i.ytimg.com/vi/TEUX2rFeB5M/maxresdefault.jpg",
-  "timestamps": []
+  "timestamps": [
+    {
+      "time": 1039,
+      "original_time": "00:17:19",
+      "song_id": "iY7w4Kn2eQ8",
+      "comment_source": "comment",
+      "comment_date": "2025-05-01T07:19:59Z"
+    },
+    {
+      "time": 1997,
+      "original_time": "00:33:17",
+      "song_id": "AIFraP5cLV6",
+      "comment_source": "comment",
+      "comment_date": "2025-05-01T07:19:59Z"
+    },
+    {
+      "time": 3681,
+      "original_time": "01:01:21",
+      "song_id": "eatuNj_93Pf",
+      "comment_source": "comment",
+      "comment_date": "2025-05-01T07:19:59Z"
+    },
+    {
+      "time": 4663,
+      "original_time": "01:17:43",
+      "song_id": "oh6zNM7nlWg",
+      "comment_source": "comment",
+      "comment_date": "2025-05-01T07:19:59Z"
+    },
+    {
+      "time": 6877,
+      "original_time": "01:54:37",
+      "song_id": "LhJXb-I8Wh3",
+      "comment_source": "comment",
+      "comment_date": "2025-05-01T07:19:59Z"
+    }
+  ]
 }

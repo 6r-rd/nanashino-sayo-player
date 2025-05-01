@@ -1077,7 +1077,8 @@
       "song_id": "rSwG2X22IEk",
       "title": "APT.",
       "artist_ids": [
-        "JwFUhVjXbMB", "AoEoEOM2dF6"
+        "JwFUhVjXbMB",
+        "AoEoEOM2dF6"
       ]
     },
     {
@@ -1518,7 +1519,9 @@
       "song_id": "HkwNOCzP5Nj",
       "title": "経験値上昇中☆",
       "artist_ids": [
-        "M5YM6KBzSBm", "l5NLyvbRrEA", "7T2Er8wSRpy"
+        "M5YM6KBzSBm",
+        "l5NLyvbRrEA",
+        "7T2Er8wSRpy"
       ]
     },
     {
@@ -1700,7 +1703,8 @@
       "song_id": "x9cBMnc3ChW",
       "title": "3時12分",
       "artist_ids": [
-        "6YujuhT2tq-", "nIIlblJXRJh"
+        "6YujuhT2tq-",
+        "nIIlblJXRJh"
       ]
     },
     {
@@ -2085,7 +2089,8 @@
       "song_id": "9ewnVh_aIWb",
       "title": "Seven Seas",
       "artist_ids": [
-        "sEnvLc_ebPu", "irSwKLQP04X"
+        "sEnvLc_ebPu",
+        "irSwKLQP04X"
       ]
     },
     {
@@ -2169,7 +2174,8 @@
       "song_id": "pXQfuGjXiSP",
       "title": "打上花火",
       "artist_ids": [
-        "1t55NA0nbOs", "KovTBvsOIbH"
+        "1t55NA0nbOs",
+        "KovTBvsOIbH"
       ]
     },
     {
@@ -2631,7 +2637,8 @@
       "song_id": "W8UQdZLGCho",
       "title": "革命デュアリズム",
       "artist_ids": [
-        "YiDB0MrJyJY", "kvzjysQFPez"
+        "YiDB0MrJyJY",
+        "kvzjysQFPez"
       ]
     },
     {
@@ -3254,7 +3261,8 @@
       "song_id": "Fyyn63jJv3b",
       "title": "飛天",
       "artist_ids": [
-        "Y751jupXkqf", "gwp8TrGYES4"
+        "Y751jupXkqf",
+        "gwp8TrGYES4"
       ]
     },
     {
@@ -3520,7 +3528,8 @@
       "song_id": "lFcj3EKcovu",
       "title": "from the edge",
       "artist_ids": [
-        "JBSpz1upGJM", "7zjCwMSBA9x"
+        "JBSpz1upGJM",
+        "7zjCwMSBA9x"
       ]
     },
     {
@@ -3751,7 +3760,8 @@
       "song_id": "JeDcHzIbDLu",
       "title": "you",
       "artist_ids": [
-        "p0NOypN7Ihf",  "mRoPtNOkZLt"
+        "p0NOypN7Ihf",
+        "mRoPtNOkZLt"
       ]
     },
     {
@@ -6881,6 +6891,20 @@
       "title": "1925",
       "artist_ids": [
         "rI1A1741EWc"
+      ]
+    },
+    {
+      "song_id": "AIFraP5cLV6",
+      "title": "才悩人応援歌",
+      "artist_ids": [
+        "oA6KqRrYaMl"
+      ]
+    },
+    {
+      "song_id": "oh6zNM7nlWg",
+      "title": "ダーリン",
+      "artist_ids": [
+        "IVunvNtaGJH"
       ]
     }
   ]
