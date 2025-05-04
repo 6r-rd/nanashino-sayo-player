@@ -390,10 +390,25 @@ function findOrCreateSong(songTitle, artistIds, songs) {
     }
   }
   
-  // If we have exact title matches but no artist match, use the first match
+  // If we have exact title matches but no artist match, prioritize songs by 七篠さよ
   // This handles the case where a comment only includes the song title
   if (exactMatches.length > 0) {
-    const existingSong = exactMatches[0];
+    let existingSong = null;
+    
+    // 七篠さよのIDを含む曲を優先
+    // Prioritize songs by 七篠さよ (artist_id: irSwKLQP04X)
+    for (const song of exactMatches) {
+      if (song.artist_ids.includes('irSwKLQP04X')) {
+        existingSong = song;
+        break;
+      }
+    }
+    
+    // 七篠さよの曲が見つからなければ最初の曲を使用
+    // If no song by 七篠さよ is found, use the first match
+    if (!existingSong) {
+      existingSong = exactMatches[0];
+    }
     
     // 既存の曲が見つかった場合は、artist_idsを更新せずにそのまま返す
     // Return existing song without updating artist_ids
