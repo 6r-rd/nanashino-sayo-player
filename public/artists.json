@@ -191,7 +191,9 @@
     {
       "artist_id": "j9FgW7zH6-y",
       "name": "電ポルP",
-      "aliases": ["koyori"]
+      "aliases": [
+        "koyori"
+      ]
     },
     {
       "artist_id": "2i9pP-flU1e",
@@ -819,7 +821,7 @@
     },
     {
       "artist_id": "NZUalSHl5g5",
-      "name":  "宮崎歩"
+      "name": "宮崎歩"
     },
     {
       "artist_id": "9nQv9OCDTWJ",
@@ -868,7 +870,9 @@
     {
       "artist_id": "VcCG6GgaxFm",
       "name": "timelesz",
-      "aliases": ["Sexy Zone"]
+      "aliases": [
+        "Sexy Zone"
+      ]
     },
     {
       "artist_id": "GTkGAaRaEUV",
@@ -913,7 +917,9 @@
     {
       "artist_id": "B5dZ0ofur1L",
       "name": "松任谷由実",
-      "aliases": ["松任谷由実(荒井由実)"]
+      "aliases": [
+        "松任谷由実(荒井由実)"
+      ]
     },
     {
       "artist_id": "acJBWiF2jjQ",
@@ -946,12 +952,16 @@
     {
       "artist_id": "0dpPzgfQRd3",
       "name": "OLIVIA",
-      "aliases": ["OLIVIA inspi' REIRA (TRAPNEST)"]
+      "aliases": [
+        "OLIVIA inspi' REIRA (TRAPNEST)"
+      ]
     },
     {
       "artist_id": "9BFpAMo4qqJ",
       "name": "土屋アンナ",
-      "aliases": ["ANNA inspi' NANA(BLACK STONES)"]
+      "aliases": [
+        "ANNA inspi' NANA(BLACK STONES)"
+      ]
     },
     {
       "artist_id": "0bYPuzyZEm_",
@@ -1136,7 +1146,9 @@
     {
       "artist_id": "VG0WkHwiPPY",
       "name": "SAYURI",
-      "aliases": ["石川さゆり"]
+      "aliases": [
+        "石川さゆり"
+      ]
     },
     {
       "artist_id": "jdam8sNROpU",
@@ -1169,7 +1181,9 @@
     {
       "artist_id": "GpyLv-z30Ka",
       "name": "ナノウ",
-      "aliases": ["ほえほえP"]
+      "aliases": [
+        "ほえほえP"
+      ]
     },
     {
       "artist_id": "1UfgCBEJhVq",
@@ -1282,7 +1296,9 @@
     {
       "artist_id": "1jVi6XyfAnc",
       "name": "慎吾ママ",
-      "aliases": ["香取慎吾"]
+      "aliases": [
+        "香取慎吾"
+      ]
     },
     {
       "artist_id": "0wL-9wW5rHW",
@@ -1587,7 +1603,9 @@
     {
       "artist_id": "Pt6WFZ2BQsT",
       "name": "PRINCESS PRINCESS",
-      "aliases": ["プリンセス プリンセス"]
+      "aliases": [
+        "プリンセス プリンセス"
+      ]
     },
     {
       "artist_id": "Y_t4iSY31Pa",
@@ -1628,7 +1646,10 @@
     {
       "artist_id": "RX4xJDDwWX2",
       "name": "流星P",
-      "aliases": ["minato", "湊貴大"]
+      "aliases": [
+        "minato",
+        "湊貴大"
+      ]
     },
     {
       "artist_id": "-gOM8XC4242",
@@ -1649,6 +1670,138 @@
     {
       "artist_id": "jPG-Tw3dK0S",
       "name": "ぼーかりおどP"
+    },
+    {
+      "artist_id": "WfrHjpjs818",
+      "name": "メル"
+    },
+    {
+      "artist_id": "fXeeFCtD51v",
+      "name": "エトソラ"
+    },
+    {
+      "artist_id": "-uizXDG1n1W",
+      "name": "てにをは"
+    },
+    {
+      "artist_id": "XZYiqfQanzT",
+      "name": "バルーン"
+    },
+    {
+      "artist_id": "ApJaaXW1I9K",
+      "name": "立花希佐(寺崎裕香)"
+    },
+    {
+      "artist_id": "S_xT0LuqnG7",
+      "name": "織巻寿々(内田雄馬)"
+    },
+    {
+      "artist_id": "VDq0N0y4lbe",
+      "name": "椎名林檎"
+    },
+    {
+      "artist_id": "ALclp5WczWP",
+      "name": "宮本浩次"
+    },
+    {
+      "artist_id": "176DaLV9UCa",
+      "name": "須田景凪"
+    },
+    {
+      "artist_id": "bIchU1xko4S",
+      "name": "古川本舗"
+    },
+    {
+      "artist_id": "gfOfy4fH07E",
+      "name": "大柴広己"
+    },
+    {
+      "artist_id": "yKtlS7ai8jZ",
+      "name": "エレファントカシマシ"
+    },
+    {
+      "artist_id": "WlxwckLvG8i",
+      "name": "L&#39;Arc-en-Ciel"
+    },
+    {
+      "artist_id": "0nRfUXr_VQP",
+      "name": "Janne Da Arc"
+    },
+    {
+      "artist_id": "47ByfHeaVhC",
+      "name": "X Japan"
+    },
+    {
+      "artist_id": "FeXVdVmokfU",
+      "name": "傘村トータ"
+    },
+    {
+      "artist_id": "QH5SYKcFGij",
+      "name": "baker"
+    },
+    {
+      "artist_id": "mEtjF098h3Z",
+      "name": "seiza"
+    },
+    {
+      "artist_id": "V8sp_gZUbW1",
+      "name": "sasakure .UK"
+    },
+    {
+      "artist_id": "5itkv2Gfbw4",
+      "name": "米良美一"
+    },
+    {
+      "artist_id": "sA0ax8U8Tiz",
+      "name": "小林オニキス"
+    },
+    {
+      "artist_id": "khTPJDLHFQM",
+      "name": "tayori"
+    },
+    {
+      "artist_id": "4Oznzl8ug8Y",
+      "name": "n-buna"
+    },
+    {
+      "artist_id": "KocvOrQPKN4",
+      "name": "コレサワ"
+    },
+    {
+      "artist_id": "GE0KRykO5FY",
+      "name": "トーマ"
+    },
+    {
+      "artist_id": "uz87X4y0VtY",
+      "name": "May&#39;n"
+    },
+    {
+      "artist_id": "jBhMO4i2Hbu",
+      "name": "ミセカイ"
+    },
+    {
+      "artist_id": "Y0swdPLLG5C",
+      "name": "美風藍(蒼井翔太)"
+    },
+    {
+      "artist_id": "UM2pNfNwQSc",
+      "name": "めいちゃん"
+    },
+    {
+      "artist_id": "GlnADI3s8Rl",
+      "name": "くじら"
+    },
+    {
+      "artist_id": "xiqTOhrhaD7",
+      "name": "doriko"
+    },
+    {
+      "artist_id": "q__ZiQWa6dZ",
+      "name": "DATEKEN"
+    },
+    {
+      "artist_id": "vCNIEG_4M9T",
+      "name": "クワガタP"
     }
   ]
 }
