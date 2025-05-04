@@ -66,10 +66,12 @@ describe('Artistless Timestamps', () => {
     expect(result1.isNew).toBe(false);
     
     // Test finding a song with artist when the song has no artists
+    // With the new behavior, artist_ids are not updated
     const result2 = findOrCreateSong('ループ', ['artist2'], existingSongs);
     expect(result2.songId).toBe('test1');
     expect(result2.isNew).toBe(false);
-    expect(existingSongs[0].artist_ids).toContain('artist2');
+    // Artist IDs should not be updated
+    expect(existingSongs[0].artist_ids).toEqual([]);
     
     // Test finding a song without artist when the song has artists
     const result3 = findOrCreateSong('Clear', [], existingSongs);

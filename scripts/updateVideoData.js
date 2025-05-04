@@ -299,6 +299,19 @@ function findOrCreateArtist(artistName, artists) {
 }
 
 /**
+ * Normalize song title by removing "（オリ曲）" or "(オリ曲)" patterns
+ * @param {string} songTitle - Song title
+ * @returns {string} Normalized song title
+ */
+function normalizeSongTitle(songTitle) {
+  return songTitle
+    .replace(/[（(]オリ曲[）)]/g, '')
+    .replace(/\s*\(オリ曲\)\s*/g, '')
+    .replace(/\s*（オリ曲）\s*/g, '')
+    .trim();
+}
+
+/**
  * Find or create song
  * @param {string} songTitle - Song title
  * @param {Array} artistIds - Artist IDs
@@ -308,49 +321,82 @@ function findOrCreateArtist(artistName, artists) {
 function findOrCreateSong(songTitle, artistIds, songs) {
   // Normalize song title for comparison
   const normalizedTitle = songTitle.normalize('NFC').toLocaleLowerCase('ja');
+  const normalizedTitleWithoutOriSong = normalizeSongTitle(normalizedTitle);
+  
+  // First, try to find an exact match with artist IDs
+  let exactMatches = [];
   
   // Check if song already exists
-  const existingSong = songs.find(song => {
+  for (const song of songs) {
     // Check primary title
     const songTitleNormalized = song.title.normalize('NFC').toLocaleLowerCase('ja');
-    if (songTitleNormalized === normalizedTitle) {
-      // If either artistIds or song.artist_ids is empty, match by title only
+    const songTitleNormalizedWithoutOriSong = normalizeSongTitle(songTitleNormalized);
+    
+    // Check for title match (with or without "オリ曲" suffix)
+    const titleMatches = 
+      songTitleNormalized === normalizedTitle || 
+      songTitleNormalizedWithoutOriSong === normalizedTitleWithoutOriSong;
+    
+    if (titleMatches) {
+      // If either artistIds or song.artist_ids is empty, add to matches
       if (artistIds.length === 0 || song.artist_ids.length === 0) {
-        return true;
+        exactMatches.push(song);
+        continue;
       }
       
       // Check if any of the artist IDs match
       const artistMatch = song.artist_ids.some(id => artistIds.includes(id)) ||
                          artistIds.some(id => song.artist_ids.includes(id));
       if (artistMatch) {
-        return true;
+        // If we have artist match, this is the best match possible
+        return { songId: song.song_id, isNew: false };
+      } else {
+        // Title matches but artist doesn't - add to potential matches
+        exactMatches.push(song);
       }
     }
     
     // Check alternate titles
     if (song.alternate_titles) {
-      return song.alternate_titles.some(title => {
+      for (const title of song.alternate_titles) {
         const altTitleNormalized = title.normalize('NFC').toLocaleLowerCase('ja');
-        if (altTitleNormalized === normalizedTitle) {
-          // If either artistIds or song.artist_ids is empty, match by title only
+        const altTitleNormalizedWithoutOriSong = normalizeSongTitle(altTitleNormalized);
+        
+        // Check for alternate title match (with or without "オリ曲" suffix)
+        const altTitleMatches = 
+          altTitleNormalized === normalizedTitle || 
+          altTitleNormalizedWithoutOriSong === normalizedTitleWithoutOriSong;
+        
+        if (altTitleMatches) {
+          // If either artistIds or song.artist_ids is empty, add to matches
           if (artistIds.length === 0 || song.artist_ids.length === 0) {
-            return true;
+            exactMatches.push(song);
+            break;
           }
           
-          return (song.artist_ids.some(id => artistIds.includes(id)) ||
-                  artistIds.some(id => song.artist_ids.includes(id)));
+          // Check if any of the artist IDs match
+          const artistMatch = song.artist_ids.some(id => artistIds.includes(id)) ||
+                             artistIds.some(id => song.artist_ids.includes(id));
+          if (artistMatch) {
+            // If we have artist match, this is the best match possible
+            return { songId: song.song_id, isNew: false };
+          } else {
+            // Title matches but artist doesn't - add to potential matches
+            exactMatches.push(song);
+            break;
+          }
         }
-        return false;
-      });
+      }
     }
-    
-    return false;
-  });
+  }
   
-  if (existingSong) {
-    // If the song exists but doesn't have all the artists, add the missing ones
-    const updatedArtistIds = [...new Set([...existingSong.artist_ids, ...artistIds])];
-    existingSong.artist_ids = updatedArtistIds;
+  // If we have exact title matches but no artist match, use the first match
+  // This handles the case where a comment only includes the song title
+  if (exactMatches.length > 0) {
+    const existingSong = exactMatches[0];
+    
+    // 既存の曲が見つかった場合は、artist_idsを更新せずにそのまま返す
+    // Return existing song without updating artist_ids
     return { songId: existingSong.song_id, isNew: false };
   }
   
@@ -634,6 +680,7 @@ export {
   parseTimestamps,
   findOrCreateArtist,
   findOrCreateSong,
+  normalizeSongTitle,
   hasZeroTimestamp,
   processVideo,
   main
