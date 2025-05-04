@@ -394,14 +394,9 @@ function findOrCreateSong(songTitle, artistIds, songs) {
   // This handles the case where a comment only includes the song title
   if (exactMatches.length > 0) {
     const existingSong = exactMatches[0];
-  
-    // If the song exists but doesn't have all the artists, add the missing ones
-    // Only add artists if we have valid artist IDs
-    if (artistIds.length > 0) {
-      const updatedArtistIds = [...new Set([...existingSong.artist_ids, ...artistIds])];
-      existingSong.artist_ids = updatedArtistIds;
-    }
     
+    // 既存の曲が見つかった場合は、artist_idsを更新せずにそのまま返す
+    // Return existing song without updating artist_ids
     return { songId: existingSong.song_id, isNew: false };
   }
   

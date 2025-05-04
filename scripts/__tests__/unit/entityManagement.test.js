@@ -124,14 +124,14 @@ describe('Entity Management Functions', () => {
         { song_id: 'song-2', title: '春泥棒', artist_ids: ['artist-2'] }
       ];
       
-      // Same title but different artist - should find by title and update artist_ids
+      // Same title but different artist - should find by title without updating artist_ids
       const result = findOrCreateSong('トレモロ', ['artist-2'], songs);
       
       // Should find the existing song by title
       expect(result).toEqual({ songId: 'song-1', isNew: false });
       
-      // Should update the song's artist_ids to include the new artist
-      expect(songs[0].artist_ids).toContain('artist-2');
+      // Artist IDs should not be updated
+      expect(songs[0].artist_ids).toEqual(['artist-1']);
       
       // Should not create a new song
       expect(generateId.generateSongId).not.toHaveBeenCalled();
