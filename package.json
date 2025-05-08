@@ -16,6 +16,7 @@
     "destroy": "node scripts/destroy.js",
     "merge-duplicates": "node scripts/mergeDuplicateSongs.js",
     "merge-duplicates:dry": "node scripts/mergeDuplicateSongs.js --dry-run",
+    "find-collab-live": "node scripts/find-collab-live.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
