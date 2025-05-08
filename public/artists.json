@@ -191,7 +191,9 @@
     {
       "artist_id": "j9FgW7zH6-y",
       "name": "電ポルP",
-      "aliases": ["koyori"]
+      "aliases": [
+        "koyori"
+      ]
     },
     {
       "artist_id": "2i9pP-flU1e",
@@ -819,7 +821,7 @@
     },
     {
       "artist_id": "NZUalSHl5g5",
-      "name":  "宮崎歩"
+      "name": "宮崎歩"
     },
     {
       "artist_id": "9nQv9OCDTWJ",
@@ -868,7 +870,9 @@
     {
       "artist_id": "VcCG6GgaxFm",
       "name": "timelesz",
-      "aliases": ["Sexy Zone"]
+      "aliases": [
+        "Sexy Zone"
+      ]
     },
     {
       "artist_id": "GTkGAaRaEUV",
@@ -913,7 +917,9 @@
     {
       "artist_id": "B5dZ0ofur1L",
       "name": "松任谷由実",
-      "aliases": ["松任谷由実(荒井由実)"]
+      "aliases": [
+        "松任谷由実(荒井由実)"
+      ]
     },
     {
       "artist_id": "acJBWiF2jjQ",
@@ -946,12 +952,16 @@
     {
       "artist_id": "0dpPzgfQRd3",
       "name": "OLIVIA",
-      "aliases": ["OLIVIA inspi' REIRA (TRAPNEST)"]
+      "aliases": [
+        "OLIVIA inspi' REIRA (TRAPNEST)"
+      ]
     },
     {
       "artist_id": "9BFpAMo4qqJ",
       "name": "土屋アンナ",
-      "aliases": ["ANNA inspi' NANA(BLACK STONES)"]
+      "aliases": [
+        "ANNA inspi' NANA(BLACK STONES)"
+      ]
     },
     {
       "artist_id": "0bYPuzyZEm_",
@@ -1136,7 +1146,9 @@
     {
       "artist_id": "VG0WkHwiPPY",
       "name": "SAYURI",
-      "aliases": ["石川さゆり"]
+      "aliases": [
+        "石川さゆり"
+      ]
     },
     {
       "artist_id": "jdam8sNROpU",
@@ -1169,7 +1181,9 @@
     {
       "artist_id": "GpyLv-z30Ka",
       "name": "ナノウ",
-      "aliases": ["ほえほえP"]
+      "aliases": [
+        "ほえほえP"
+      ]
     },
     {
       "artist_id": "1UfgCBEJhVq",
@@ -1282,7 +1296,9 @@
     {
       "artist_id": "1jVi6XyfAnc",
       "name": "慎吾ママ",
-      "aliases": ["香取慎吾"]
+      "aliases": [
+        "香取慎吾"
+      ]
     },
     {
       "artist_id": "0wL-9wW5rHW",
@@ -1587,7 +1603,9 @@
     {
       "artist_id": "Pt6WFZ2BQsT",
       "name": "PRINCESS PRINCESS",
-      "aliases": ["プリンセス プリンセス"]
+      "aliases": [
+        "プリンセス プリンセス"
+      ]
     },
     {
       "artist_id": "Y_t4iSY31Pa",
@@ -1628,7 +1646,10 @@
     {
       "artist_id": "RX4xJDDwWX2",
       "name": "流星P",
-      "aliases": ["minato", "湊貴大"]
+      "aliases": [
+        "minato",
+        "湊貴大"
+      ]
     },
     {
       "artist_id": "-gOM8XC4242",
