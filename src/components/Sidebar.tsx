@@ -321,6 +321,7 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
               setDate={setToDate} 
               placeholder="To" 
               className="w-full"
+              mobileAlign="right"
             />
           </div>
         </div>

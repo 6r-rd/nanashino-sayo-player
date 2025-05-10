@@ -11,6 +11,7 @@ interface SimpleDatePickerProps {
   setDate: (date: Date | undefined) => void
   placeholder?: string
   className?: string
+  mobileAlign?: "left" | "right"; // New prop
 }
 
 export function SimpleDatePicker({
@@ -18,9 +19,11 @@ export function SimpleDatePicker({
   setDate,
   placeholder = "Pick a date",
   className,
+  mobileAlign = "left", // Default to "left"
 }: SimpleDatePickerProps) {
   const [open, setOpen] = React.useState(false)
   const [displayedMonth, setDisplayedMonth] = React.useState<Date>(() => date || new Date());
+  const [isMobile, setIsMobile] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
@@ -29,6 +32,15 @@ export function SimpleDatePicker({
       setDisplayedMonth(date || new Date());
     }
   }, [open]); // Rerun when the popover open state changes
+
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Using 768px as the breakpoint for mobile
+    };
+    checkMobile(); // Initial check
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleClickOutside = React.useCallback((event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -72,7 +84,11 @@ export function SimpleDatePicker({
         {date ? format(date, "PPP", { locale: ja }) : <span>{placeholder}</span>}
       </Button>
       {open && (
-        <div className="absolute top-full left-0 z-50 mt-2 bg-popover text-popover-foreground rounded-md border shadow-md min-w-[280px]">
+        <div className={cn(
+          "absolute top-full z-50 mt-2 bg-popover text-popover-foreground rounded-md border shadow-md min-w-[280px]",
+          // Updated logic:
+          isMobile && mobileAlign === "right" ? "right-0" : "left-0"
+        )}>
           <div className="flex flex-col">
             <div className="flex justify-between items-center p-2">
               <button
