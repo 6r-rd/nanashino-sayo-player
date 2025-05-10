@@ -20,7 +20,15 @@ export function SimpleDatePicker({
   className,
 }: SimpleDatePickerProps) {
   const [open, setOpen] = React.useState(false)
+  const [displayedMonth, setDisplayedMonth] = React.useState<Date>(() => date || new Date());
   const containerRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (open) {
+      // When the calendar opens, reset displayedMonth to the currently selected date or today
+      setDisplayedMonth(date || new Date());
+    }
+  }, [open]); // Rerun when the popover open state changes
 
   const handleClickOutside = React.useCallback((event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -69,22 +77,26 @@ export function SimpleDatePicker({
             <div className="flex justify-between items-center p-2">
               <button
                 onClick={() => {
-                  const prevMonth = new Date(date || new Date());
-                  prevMonth.setMonth(prevMonth.getMonth() - 1);
-                  setDate(prevMonth);
+                  setDisplayedMonth(current => {
+                    const newDisplayedMonth = new Date(current);
+                    newDisplayedMonth.setMonth(newDisplayedMonth.getMonth() - 1);
+                    return newDisplayedMonth;
+                  });
                 }}
                 className="p-1 rounded-md hover:bg-muted"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <div className="text-sm font-medium">
-                {date ? format(date, "yyyy年MM月", { locale: ja }) : format(new Date(), "yyyy年MM月", { locale: ja })}
+                {format(displayedMonth, "yyyy年MM月", { locale: ja })}
               </div>
               <button
                 onClick={() => {
-                  const nextMonth = new Date(date || new Date());
-                  nextMonth.setMonth(nextMonth.getMonth() + 1);
-                  setDate(nextMonth);
+                  setDisplayedMonth(current => {
+                    const newDisplayedMonth = new Date(current);
+                    newDisplayedMonth.setMonth(newDisplayedMonth.getMonth() + 1);
+                    return newDisplayedMonth;
+                  });
                 }}
                 className="p-1 rounded-md hover:bg-muted"
               >
@@ -95,7 +107,8 @@ export function SimpleDatePicker({
               mode="single"
               selected={date}
               onSelect={handleSelect}
-              defaultMonth={date}
+              month={displayedMonth}
+              onMonthChange={setDisplayedMonth}
               locale={ja}
               className="[&_table]:mt-0"
               components={{
