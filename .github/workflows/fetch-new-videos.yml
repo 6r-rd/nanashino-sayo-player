@@ -7,9 +7,9 @@ on:
         description: "YouTube Channel ID to fetch videos from"
         required: false
         type: string
-  schedule:
-    # Run once a day at midnight UTC
-    - cron: "0 0 * * *"
+  #schedule:
+  # Run once a day at midnight UTC
+  #- cron: "0 0 * * *"
 
 jobs:
   fetch-new-videos:
