@@ -20,51 +20,6 @@ export async function getAllVideos(): Promise<VideoData[]> {
     
     logger.log(`Found ${videoIds.length} videos in the list`);
     
-    // If no videos list is available, try to fetch all videos from the public directory
-    if (videoIds.length === 0) {
-      logger.log("No videos list found, trying to fetch all videos from the public directory");
-      
-      // In a client-side context, we can't list directory contents directly
-      // So we'll use a fallback approach to fetch known videos
-      const fallbackVideoIds = [
-        "AZ6KhfbTPDk", "ucwLUtGvltY", "V7cvjjTJp9M", "fjOu8eJD5jA",
-        "hWuoRpMuKtw", "pxQDMfL6ckc", "s46rfCM_INE", "fyhd7BTxwJQ",
-        "QYIbgN8clIo", "t2PUxKyyLDA", "t08xkND1VGk", "wrqcnT6cBkE",
-        "Mvgjsw9UH9M", "oI7XvYKMW2Q", "-myXVfPWTGs", "x_UsqrYrqhk"
-      ];
-      
-      logger.log(`Using fallback list with ${fallbackVideoIds.length} videos`);
-      
-      const videoPromises = fallbackVideoIds.map(async (videoId: string) => {
-        try {
-          const res = await fetch(`/videos/${videoId}.json`);
-          
-          if (!res.ok) {
-            logger.error(`Failed to fetch video ${videoId}: ${res.status} ${res.statusText}`);
-            return null;
-          }
-          
-          const video = await res.json();
-          return {
-            video_id: video.video_id,
-            title: video.title,
-            start_datetime: video.start_datetime,
-            thumbnail_url: video.thumbnail_url,
-            timestamps: video.timestamps || []
-          };
-        } catch (error) {
-          logger.error(`Error fetching video ${videoId}:`, error);
-          return null;
-        }
-      });
-      
-      const videos = (await Promise.all(videoPromises)).filter(video => video !== null) as VideoData[];
-      
-      return videos.sort((a, b) => 
-        new Date(b.start_datetime).getTime() - new Date(a.start_datetime).getTime()
-      );
-    }
-    
     // Fetch each video's data
     const videoPromises = videoIds.map(async (videoId: string) => {
       try {

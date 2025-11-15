@@ -256,16 +256,62 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
   const filteredSongCounts = useMemo(() => {
     return calculateFilteredSongCounts(videos, fromDate, toDate);
   }, [videos, fromDate, toDate]);
+
+  // Calculate last sung datetime for each song within the date range
+  const songLastSungTimes = useMemo(() => {
+    const map: Record<string, number> = {};
+
+    videos.forEach((video) => {
+      const videoDate = new Date(video.start_datetime);
+
+      if (fromDate && videoDate < fromDate) {
+        return;
+      }
+
+      if (toDate) {
+        const endOfDay = new Date(toDate);
+        endOfDay.setHours(23, 59, 59, 999);
+        if (videoDate > endOfDay) {
+          return;
+        }
+      }
+
+      const startTime = videoDate.getTime();
+      if (Number.isNaN(startTime)) {
+        return;
+      }
+
+      video.timestamps?.forEach((timestamp) => {
+        const offsetSeconds = typeof timestamp.time === "number" ? timestamp.time : 0;
+        const absoluteTime = startTime + offsetSeconds * 1000;
+        const existing = map[timestamp.song_id];
+        if (existing === undefined || absoluteTime > existing) {
+          map[timestamp.song_id] = absoluteTime;
+        }
+      });
+    });
+
+    return map;
+  }, [videos, fromDate, toDate]);
+
   
   // Sort songs based on selected option, using filtered counts
   const sortedSongs = [...filteredSongs].sort((a, b) => {
     const aCount = filteredSongCounts[a.song_id] || 0;
     const bCount = filteredSongCounts[b.song_id] || 0;
-    
-    if (songsSortOption === "most-played") {
-      return bCount - aCount;
-    } else {
-      return aCount - bCount;
+    const aLast = songLastSungTimes[a.song_id];
+    const bLast = songLastSungTimes[b.song_id];
+
+    switch (songsSortOption) {
+      case "least-played":
+        return aCount - bCount;
+      case "last-sung-newest":
+        return (bLast ?? Number.NEGATIVE_INFINITY) - (aLast ?? Number.NEGATIVE_INFINITY);
+      case "last-sung-oldest":
+        return (aLast ?? Number.POSITIVE_INFINITY) - (bLast ?? Number.POSITIVE_INFINITY);
+      case "most-played":
+      default:
+        return bCount - aCount;
     }
   });
   
@@ -396,6 +442,8 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
               <SelectContent>
                 <SelectItem value="most-played">歌った回数 - 降順</SelectItem>
                 <SelectItem value="least-played">歌った回数 - 昇順</SelectItem>
+                <SelectItem value="last-sung-newest">最後に歌った日時 - 降順</SelectItem>
+                <SelectItem value="last-sung-oldest">最後に歌った日時 - 昇順</SelectItem>
               </SelectContent>
             </Select>
           </div>
