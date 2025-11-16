@@ -85,4 +85,30 @@ describe('parseTimestamps', () => {
     const result = parseTimestamps(text);
     expect(result).toEqual([]);
   });
+
+  it('skips comment lines that start with announcement prefixes', () => {
+    const text = `
+      告知 00:00 新しいお知らせ
+      00:06:25 星を編む / seiza
+      00:10:10
+      告知 次回ライブ情報
+      00:20:38 トレモロ / RADWIMPS
+    `;
+
+    const result = parseTimestamps(text, 'comment');
+
+    expect(result).toHaveLength(2);
+    expect(result[0]).toEqual({
+      time: 385,
+      original_time: '00:06:25',
+      song_title: '星を編む',
+      artist_name: 'seiza'
+    });
+    expect(result[1]).toEqual({
+      time: 1238,
+      original_time: '00:20:38',
+      song_title: 'トレモロ',
+      artist_name: 'RADWIMPS'
+    });
+  });
 });
