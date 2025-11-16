@@ -150,6 +150,12 @@ function parseTimestamps(text, source = 'unknown') {
     if (!line) {
       continue;
     }
+
+    // Skip announcement lines in comments (lines starting with "告知")
+    if (source === 'comment' && line.startsWith('告知')) {
+      timestampLogger.debug(`Skipping line ${i+1}: "${line}" (announcement prefix)`);
+      continue;
+    }
     
     // Detect timestamp - only process lines with timestamps
     const timeRegex = /(\d{1,2}:)?(\d{1,2}):(\d{1,2})/;
@@ -175,8 +181,11 @@ function parseTimestamps(text, source = 'unknown') {
         timestampLogger.debug(`  Using next line for content: "${remainingText}"`);
       }
       
-      // Skip timestamps that contain "告知:" (announcement)
-      if (remainingText.includes('告知:')) {
+      // Skip timestamps that contain announcements in comments
+      if (
+        (source === 'comment' && remainingText.startsWith('告知')) ||
+        remainingText.includes('告知:')
+      ) {
         timestampLogger.debug(`Skipping timestamp: ${originalTime} (announcement)`);
         continue;
       }
