@@ -60,8 +60,8 @@ const randomSong =
     ? enrichedSongs[Math.floor(Math.random() * enrichedSongs.length)]
     : null;
 
-const randomVideoId = randomVideo?.video_id || "Ollg_FSZ7j0"; // Fallback to existing ID
-const randomSongId = randomSong?.song_id || "5M6DFhUXInr"; // Fallback to existing ID
+const randomVideoId = randomVideo?.video_id || "AZ6KhfbTPDk"; // Fallback to existing ID
+const randomSongId = randomSong?.song_id || "T9nF-qT4Z6p"; // Fallback to existing ID
 ---
 
 <PlayerLayout title="Nanashino Sayo player">
@@ -77,52 +77,54 @@ const randomSongId = randomSong?.song_id || "5M6DFhUXInr"; // Fallback to existi
     class="flex items-center justify-center h-[calc(100vh-6rem)] overflow-x-hidden w-full"
   >
     <div
-      class="w-full max-w-[100%] sm:max-w-lg mx-auto p-2 sm:p-4 space-y-6 sm:space-y-10 overflow-hidden"
+      class="w-full max-w-[100%] sm:max-w-3xl mx-auto p-2 sm:p-6 space-y-8 sm:space-y-12 overflow-hidden sm:text-lg text-muted-foreground"
     >
-      <p
-        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
+      <p class="text-center">配信で歌った曲名等からアーカイブを検索する</p>
+      <div
+        class="bg-muted/40 border border-border rounded-lg p-4 sm:p-6 space-y-3 sm:space-y-4 w-full sm:max-w-xl mx-auto"
       >
-        これは Vsinger「<a
-          class="font-bold text-blue-600 no-underline"
-          href="https://www.youtube.com/@nanasayo09">七篠さよ</a
-        >」の YouTube
-        ライブ配信のうち「歌枠」をタイトルに含むアーカイブ動画を再生するための非公式
-        Web サイトです。
-      </p>
-      <p
-        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
-      >
-        再生を開始するには、サイドバーの Archives
-        タブから動画を選択してください。
-      </p>
-      <p
-        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
-      >
-        サイドバーの Songs
-        タブから曲を選択すると、その曲が含まれる動画の一覧が表示されます。
-      </p>
-      <p
-        class="text-muted-foreground text-base sm:text-lg whitespace-normal text-left"
-      >
-        下のボタンからランダムに動画や曲を選択することもできます。
-      </p>
-      <div class="flex flex-row gap-4 justify-center">
-        <Button id="random-video-btn" className="h-12 px-4">
-          <a
-            id="random-video-link"
-            href={`${import.meta.env.BASE_URL}/video/${randomVideoId}`}
-            class="flex items-center justify-center w-full h-full"
-            >ランダム動画選択</a
+        <form id="search-form" class="space-y-3">
+          <label class="sr-only" for="search-input"
+            >曲名 / アーティスト名を入力</label
           >
-        </Button>
-        <Button id="random-song-btn" className="h-12 px-4">
-          <a
-            id="random-song-link"
-            href={`${import.meta.env.BASE_URL}/song/${randomSongId}`}
-            class="flex items-center justify-center w-full h-full"
-            >ランダム曲選択</a
-          >
-        </Button>
+          <div class="relative space-y-1">
+            <input
+              id="search-input"
+              type="text"
+              placeholder="曲名またはアーティスト名を入力"
+              class="w-full my-1 rounded-md border border-input bg-background px-3 py-2 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              autocomplete="off"
+            />
+            <div
+              id="search-results"
+              class="hidden absolute left-0 right-0 z-10 mt-2 border border-input rounded-md bg-background shadow-lg divide-y divide-border max-h-60 overflow-y-auto"
+            >
+            </div>
+          </div>
+        </form>
+      </div>
+      <div
+        class="flex flex-col items-center text-center space-y-4 sm:text-lg text-muted-foreground"
+      >
+        <p>ランダムで再生する動画や曲を選択する</p>
+        <div class="flex flex-row gap-4 justify-center flex-wrap mt-4">
+          <Button id="random-video-btn" className="h-12 px-4">
+            <a
+              id="random-video-link"
+              href={`${import.meta.env.BASE_URL}/video/${randomVideoId}`}
+              class="flex items-center justify-center w-full h-full"
+              >ランダム動画選択</a
+            >
+          </Button>
+          <Button id="random-song-btn" className="h-12 px-4">
+            <a
+              id="random-song-link"
+              href={`${import.meta.env.BASE_URL}/song/${randomSongId}`}
+              class="flex items-center justify-center w-full h-full"
+              >ランダム曲選択</a
+            >
+          </Button>
+        </div>
       </div>
 
       <script
@@ -161,10 +163,83 @@ const randomSongId = randomSong?.song_id || "5M6DFhUXInr"; // Fallback to existi
           window.location.href = link.href;
         }
 
+        // Normalize text similar to Sidebar search
+        function normalizeText(text) {
+          if (!text) return "";
+          return text.normalize("NFC").toLocaleLowerCase("ja");
+        }
+
+        // Find matching songs for incremental search (all matches, scrollable list)
+        function getMatchingSongs(query) {
+          const normalizedQuery = normalizeText(query);
+          if (!normalizedQuery) return [];
+
+          return enrichedSongs.filter((song) => {
+            const titleMatch = normalizeText(song.title).includes(
+              normalizedQuery
+            );
+            const artistMatch = normalizeText(
+              (song.artist_names || []).join(", ")
+            ).includes(normalizedQuery);
+            const altMatch = Array.isArray(song.alternate_titles)
+              ? song.alternate_titles.some((alt) =>
+                  normalizeText(alt).includes(normalizedQuery)
+                )
+              : false;
+
+            return titleMatch || artistMatch || altMatch;
+          });
+        }
+
+        function renderMatches(matches) {
+          const results = document.getElementById("search-results");
+          if (!results) return;
+
+          if (!matches.length) {
+            results.classList.add("hidden");
+            results.innerHTML = "";
+            return;
+          }
+
+          results.innerHTML = matches
+            .map(
+              (song) => `
+                <button
+                  type="button"
+                  class="w-full text-left px-3 py-2 hover:bg-accent focus:bg-accent focus:outline-none"
+                  data-song-id="${song.song_id}"
+                >
+                  <div class="font-medium leading-tight">${song.title}</div>
+                  <div class="text-sm text-muted-foreground leading-tight">${(song.artist_names || []).join(", ")}</div>
+                </button>
+              `
+            )
+            .join("");
+
+          results.classList.remove("hidden");
+        }
+
+        function handleSearch(event) {
+          event.preventDefault();
+          const input = document.getElementById("search-input");
+          if (!input) return;
+
+          const matches = getMatchingSongs(input.value, 1);
+          const songId = matches[0]?.song_id;
+          if (songId) {
+            window.location.href = `${basePath}/song/${songId}`;
+          } else {
+            alert("入力された曲名に一致する曲が見つかりませんでした。");
+          }
+        }
+
         // Add event listeners
         document.addEventListener("DOMContentLoaded", () => {
           const videoBtn = document.getElementById("random-video-btn");
           const songBtn = document.getElementById("random-song-btn");
+          const searchForm = document.getElementById("search-form");
+          const searchInput = document.getElementById("search-input");
+          const searchResults = document.getElementById("search-results");
 
           if (videoBtn) {
             videoBtn.addEventListener("click", updateRandomVideoLink);
@@ -172,6 +247,26 @@ const randomSongId = randomSong?.song_id || "5M6DFhUXInr"; // Fallback to existi
 
           if (songBtn) {
             songBtn.addEventListener("click", updateRandomSongLink);
+          }
+
+          if (searchForm) {
+            searchForm.addEventListener("submit", handleSearch);
+          }
+
+          if (searchInput && searchResults) {
+            searchInput.addEventListener("input", (event) => {
+              const value = event.target.value || "";
+              const matches = getMatchingSongs(value);
+              renderMatches(matches);
+            });
+
+            searchResults.addEventListener("click", (event) => {
+              const target = event.target.closest("button[data-song-id]");
+              if (!target) return;
+              const songId = target.getAttribute("data-song-id");
+              if (!songId) return;
+              window.location.href = `${basePath}/song/${songId}`;
+            });
           }
         });
       </script>

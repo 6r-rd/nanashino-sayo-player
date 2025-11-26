@@ -102,17 +102,18 @@ function processVideo(videoId) {
 }
 
 /**
- * Check if a video has "歌枠" in its title
+ * Check if a video is still available (public or unlisted)
  * @param {string} videoId - YouTube video ID
- * @returns {Promise<boolean>} Whether the video has "歌枠" in its title
+ * @returns {Promise<boolean>} Whether the video can be fetched via the API
  */
-async function hasKaraokeTitleTag(videoId) {
+async function isVideoAvailable(videoId) {
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) {
     throw new Error('YOUTUBE_API_KEY environment variable is not set');
   }
 
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`;
+  // If the video is deleted or private, the API returns an empty items array.
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=status&id=${videoId}&key=${apiKey}`;
   
   const response = await fetch(url);
   if (!response.ok) {
@@ -123,9 +124,14 @@ async function hasKaraokeTitleTag(videoId) {
   if (data.items.length === 0) {
     return false;
   }
-  
-  const title = data.items[0].snippet.title;
-  return title.includes('歌枠');
+
+  const status = data.items[0].status;
+  if (!status) {
+    return true;
+  }
+
+  const privacyStatus = status.privacyStatus;
+  return privacyStatus === 'public' || privacyStatus === 'unlisted';
 }
 
 /**
@@ -163,7 +169,7 @@ async function main() {
       const files = fs.readdirSync(VIDEOS_DIR);
       const jsonFiles = files.filter(file => file.endsWith('.json'));
       
-      logger.log(`Checking ${jsonFiles.length} existing JSON files for videos without "歌枠" in the title...`);
+      logger.log(`Checking ${jsonFiles.length} existing JSON files for unavailable videos...`);
       
       for (const jsonFile of jsonFiles) {
         const videoId = jsonFile.replace('.json', '');
@@ -173,9 +179,9 @@ async function main() {
           continue;
         }
         
-        // Check if the video has "歌枠" in its title
-        const hasKaraokeTag = await hasKaraokeTitleTag(videoId);
-        if (!hasKaraokeTag) {
+        // Remove entries for videos that are no longer accessible
+        const available = await isVideoAvailable(videoId);
+        if (!available) {
           deleteVideoJson(videoId);
         }
       }
