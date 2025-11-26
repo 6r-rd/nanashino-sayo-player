@@ -65,6 +65,8 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
   const [archivesSortOption, setArchivesSortOption] = useState<string>("newest");
   const [songsSortOption, setSongsSortOption] = useState<string>("most-played");
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hasHydrated, setHasHydrated] = useState(false);
   
   // Prevent keyboard from appearing when sidebar is opened
   const handleSheetOpenChange = (open: boolean) => {
@@ -81,16 +83,38 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
     }
   };
   
-  // Register the swipe callback when the component mounts
+  // Track viewport size and close the drawer when moving to desktop
   useEffect(() => {
-    // Only register the callback for mobile view
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      const unregister = registerSwipeCallback(() => handleSheetOpenChange(true));
-      
-      // Unregister the callback when the component unmounts
-      return unregister;
+    if (typeof window === "undefined") {
+      return;
     }
+
+    setHasHydrated(true);
+
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const updateIsMobile = (event?: MediaQueryListEvent) => {
+      const matches = event ? event.matches : mediaQuery.matches;
+      setIsMobile(matches);
+      if (!matches) {
+        setIsOpen(false);
+      }
+    };
+
+    updateIsMobile();
+    mediaQuery.addEventListener("change", updateIsMobile);
+    
+    return () => {
+      mediaQuery.removeEventListener("change", updateIsMobile);
+    };
   }, []);
+
+  // Register the swipe callback when the component mounts in mobile view
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const unregister = registerSwipeCallback(() => handleSheetOpenChange(true));
+    return unregister;
+  }, [isMobile]);
 
   // 最初の URL を抽出する関数
   const extractFirstUrl = (text: string): string | null => {
@@ -293,7 +317,7 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
 
     return map;
   }, [videos, fromDate, toDate]);
-
+  
   
   // Sort songs based on selected option, using filtered counts
   const sortedSongs = [...filteredSongs].sort((a, b) => {
@@ -530,12 +554,13 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
     </>
   );
 
-  // Check if we're in a mobile context by looking at the parent element's classes
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
   // For desktop, render the content directly
   if (!isMobile) {
-    return sidebarContent;
+    return (
+      <div className={hasHydrated ? "" : "hidden md:block"}>
+        {sidebarContent}
+      </div>
+    );
   }
   
   // For mobile, render the drawer
@@ -551,14 +576,16 @@ export function Sidebar({ songs, videos, artists, onSelectVideo, onSelectSong, d
       </Sheet>
       
       {/* Drawer hint - icon on left edge */}
-      <div 
-        className="fixed left-0 top-16 bottom-0 w-10 z-10"
-        onClick={() => handleSheetOpenChange(true)}
-      >
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 bg-primary/90 rounded-r-lg p-2 shadow-md">
-          <ChevronsRight className="h-6 w-6 text-background" />
+      {hasHydrated && (
+        <div 
+          className="fixed left-0 top-16 bottom-0 w-10 z-10"
+          onClick={() => handleSheetOpenChange(true)}
+        >
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 bg-primary/90 rounded-r-lg p-2 shadow-md">
+            <ChevronsRight className="h-6 w-6 text-background" />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }
