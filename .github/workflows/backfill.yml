@@ -31,7 +31,7 @@ jobs:
       BATCH_START: ${{ github.event.inputs.batch_start }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
