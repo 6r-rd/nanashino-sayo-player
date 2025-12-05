@@ -4782,14 +4782,6 @@
       ]
     },
     {
-      "song_id": "oyw7r3rbS6X",
-      "title": "ライオン",
-      "artist_ids": [
-        "GTAvrYVPmP_",
-        "CxVET2C7grv"
-      ]
-    },
-    {
       "song_id": "URVqSV4YHub",
       "title": "ウンディーネ",
       "artist_ids": [
@@ -7771,6 +7763,48 @@
       "title": "Psyllium",
       "artist_ids": [
         "HstXJ6kNnMk"
+      ]
+    },
+    {
+      "song_id": "YuX4mmoRAso",
+      "title": "寄り酔い",
+      "artist_ids": [
+        "vwGhA2jxnNM"
+      ]
+    },
+    {
+      "song_id": "r4Q0s-kn9rE",
+      "title": "ゆずれない願い",
+      "artist_ids": [
+        "mqaOMuDlpWE"
+      ]
+    },
+    {
+      "song_id": "UoPVZ9eH8rg",
+      "title": "地球最後の告白を",
+      "artist_ids": [
+        "_DHBsGp3at8"
+      ]
+    },
+    {
+      "song_id": "39VZMbC5fLn",
+      "title": "いい日旅立ち",
+      "artist_ids": [
+        "tbjrypewSwP"
+      ]
+    },
+    {
+      "song_id": "r-1p0LkoRX6",
+      "title": "世界が終わる夜に",
+      "artist_ids": [
+        "BwZLOcrHbJZ"
+      ]
+    },
+    {
+      "song_id": "tREGm-ZsMqO",
+      "title": "水平線",
+      "artist_ids": [
+        "-INrlR23Eia"
       ]
     }
   ]
