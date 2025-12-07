@@ -22,10 +22,10 @@ jobs:
       YOUTUBE_CHANNEL_ID: ${{ secrets.YOUTUBE_CHANNEL_ID }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@c2d88d3ecc89a9ef08eebf45d9637801dcee7eb5
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3
 
       - name: Set up Node.js
-        uses: actions/setup-node@633bb92bc0aabcae06e8ea93b85aecddd374c402
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
         with:
           node-version-file: ".node-version"
           cache: "npm"
@@ -65,7 +65,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check_changes.outputs.has_video_changes == 'true'
-        uses: peter-evans/create-pull-request@4e1beaa7521e8b457b572c090b25bd3db56bf1c5
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412
         with:
           commit-message: "Update video data with new videos"
           title: "Update video data with new videos"
