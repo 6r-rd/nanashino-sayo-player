@@ -49,6 +49,7 @@ The script will:
 2. Filter videos to only include those with "歌枠" in the title
 3. Process each new video using `updateVideoData.js`
 4. Delete JSON files for videos that don't have "歌枠" in the title
+5. Skip any video IDs listed in `scripts/config/excludedVideoIds.json` (keep it as an empty array when there are no exclusions)
 
 ### generateVideosList.js
 

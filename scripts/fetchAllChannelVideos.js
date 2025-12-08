@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import { generateVideosList } from './generateVideosList.js';
 import { createNamespacedLogger } from './debug.js';
+import { loadExcludedVideoIds } from './excludedVideoIds.js';
 
 // スクリプト用のロガーを作成
 const logger = createNamespacedLogger('script:fetchAll');
@@ -139,15 +140,25 @@ function processVideo(videoId) {
 // Main function
 async function main() {
   try {
+    const excludedVideoIds = loadExcludedVideoIds(logger);
+    if (excludedVideoIds.size > 0) {
+      logger.log(`Loaded ${excludedVideoIds.size} excluded video IDs`);
+    }
+
     // Fetch all videos from channel
     const videos = await fetchAllChannelVideos();
     logger.log(`Found ${videos.length} karaoke streams in channel`);
+
+    const filteredVideos = videos.filter(video => !excludedVideoIds.has(video.id));
+    if (filteredVideos.length !== videos.length) {
+      logger.log(`Excluding ${videos.length - filteredVideos.length} videos based on excludedVideoIds.json`);
+    }
     
     // Sort videos by published date (newest first)
-    videos.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
+    filteredVideos.sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
     
     // Filter out videos that have already been processed
-    const newVideos = videos.filter(video => !isVideoProcessed(video.id));
+    const newVideos = filteredVideos.filter(video => !isVideoProcessed(video.id));
     logger.log(`Found ${newVideos.length} new karaoke streams to process`);
     
     // Apply batch processing if specified
