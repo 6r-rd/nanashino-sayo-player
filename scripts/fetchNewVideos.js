@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
 import { generateVideosList } from './generateVideosList.js';
 import { createNamespacedLogger } from './debug.js';
+import { loadExcludedVideoIds } from './excludedVideoIds.js';
 
 // スクリプト用のロガーを作成
 const logger = createNamespacedLogger('script:fetchVideos');
@@ -151,12 +152,23 @@ function deleteVideoJson(videoId) {
  */
 async function main() {
   try {
+    const excludedVideoIds = loadExcludedVideoIds(logger);
+    if (excludedVideoIds.size > 0) {
+      logger.log(`Loaded ${excludedVideoIds.size} excluded video IDs`);
+    }
+
     // Fetch videos from channel
     const videoIds = await fetchChannelVideos();
     logger.log(`Found ${videoIds.length} videos with "歌枠" in the title`);
+
+    const filteredVideoIds = videoIds.filter(id => !excludedVideoIds.has(id));
+    if (filteredVideoIds.length !== videoIds.length) {
+      logger.log(`Excluding ${videoIds.length - filteredVideoIds.length} videos based on excludedVideoIds.json`);
+    }
+    const filteredVideoIdsSet = new Set(filteredVideoIds);
     
     // Filter out videos that have already been processed
-    const newVideoIds = videoIds.filter(id => !isVideoProcessed(id));
+    const newVideoIds = filteredVideoIds.filter(id => !isVideoProcessed(id));
     logger.log(`Found ${newVideoIds.length} new videos with "歌枠" in the title`);
     
     // Process each new video
@@ -175,7 +187,7 @@ async function main() {
         const videoId = jsonFile.replace('.json', '');
         
         // Skip videos that are in our list of valid karaoke videos
-        if (videoIds.includes(videoId)) {
+        if (filteredVideoIdsSet.has(videoId)) {
           continue;
         }
         
