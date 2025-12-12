@@ -49,7 +49,7 @@ jobs:
           PUBLIC_REPOSITORY_NAME: ${{ env.REPO_NAME }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./site
 
