@@ -21,9 +21,6 @@ This script fetches data for a specific YouTube video and updates the correspond
 
 ```bash
 node scripts/updateVideoData.js VIDEO_ID
-
-# Force timestamps to be taken from user comments instead of the description
-npm run update-video VIDEO_ID -- --user-comment
 ```
 
 Where `VIDEO_ID` is the YouTube video ID to update.
@@ -35,8 +32,6 @@ The script will:
 3. Parse timestamps from the description or comments
 4. Update the video JSON file in `public/videos/`
 5. Update the songs and artists JSON files if new songs or artists are found
-
-Pass `--user-comment` to ignore the video description and extract timestamps only from viewer comments when needed.
 
 ### fetchNewVideos.js
 

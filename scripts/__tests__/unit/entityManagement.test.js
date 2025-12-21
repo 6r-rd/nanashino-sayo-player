@@ -118,17 +118,23 @@ describe('Entity Management Functions', () => {
       expect(generateId.generateSongId).not.toHaveBeenCalled();
     });
     
-    it('requires artist match for song identification', () => {
+    it('finds song by title even with different artist IDs', () => {
       const songs = [
         { song_id: 'song-1', title: 'トレモロ', artist_ids: ['artist-1'] },
         { song_id: 'song-2', title: '春泥棒', artist_ids: ['artist-2'] }
       ];
       
-      // Same title but different artist
+      // Same title but different artist - should find by title without updating artist_ids
       const result = findOrCreateSong('トレモロ', ['artist-2'], songs);
       
-      expect(result).toEqual({ songId: 'new-song-id', isNew: true });
-      expect(generateId.generateSongId).toHaveBeenCalledWith(songs);
+      // Should find the existing song by title
+      expect(result).toEqual({ songId: 'song-1', isNew: false });
+      
+      // Artist IDs should not be updated
+      expect(songs[0].artist_ids).toEqual(['artist-1']);
+      
+      // Should not create a new song
+      expect(generateId.generateSongId).not.toHaveBeenCalled();
     });
     
     it('creates a new song when no match is found', () => {
