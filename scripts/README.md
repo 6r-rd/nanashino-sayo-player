@@ -25,6 +25,18 @@ node scripts/updateVideoData.js VIDEO_ID
 
 Where `VIDEO_ID` is the YouTube video ID to update.
 
+To ignore timestamps in the description and extract only from user comments:
+
+```bash
+node scripts/updateVideoData.js VIDEO_ID --user-comment
+```
+
+When running via npm:
+
+```bash
+npm run update-video -- VIDEO_ID --user-comment
+```
+
 The script will:
 
 1. Fetch video details from the YouTube API

@@ -127,18 +127,19 @@ function convertTimeToSeconds(timeStr) {
  * 
  * 【タイムスタンプ処理の仕様】
  * 1. 摘要欄（description）のタイムスタンプ:
- *    - 0秒のタイムスタンプ（0:00, 00:00など）はスキップしない
+ *    - 0秒のタイムスタンプ（0:00, 00:00など）はデータとしては追加しないが、存在は記録する
  *    - 0秒のタイムスタンプの存在を使って、摘要欄のタイムスタンプがYouTubeのチャプターマーカーであるかを判定する
  *    - チャプターマーカーと判定された場合のみ、摘要欄のタイムスタンプを優先する
  * 
  * 2. コメント（comment）のタイムスタンプ:
- *    - 0秒のタイムスタンプはスキップする（通常、実際の曲ではなくイントロや説明を示すため）
+ *    - 0秒のタイムスタンプはスキップし、存在のみ記録する（通常、実際の曲ではなくイントロや説明を示すため）
  *    - 摘要欄にチャプターマーカーがない場合や、摘要欄にタイムスタンプがない場合に使用する
  */
 function parseTimestamps(text, source = 'unknown') {
   // Process line by line
   const lines = text.split('\n');
   const timestamps = [];
+  let hasZeroTimestampDetected = false;
   
   // Debug: Log all lines for inspection
   timestampLogger.debug(`Processing ${lines.length} lines of text`);
@@ -150,18 +151,12 @@ function parseTimestamps(text, source = 'unknown') {
     if (!line) {
       continue;
     }
-
-    // Skip announcement lines in comments (lines starting with "告知")
-    if (source === 'comment' && line.startsWith('告知')) {
-      timestampLogger.debug(`Skipping line ${i+1}: "${line}" (announcement prefix)`);
-      continue;
-    }
     
     // Detect timestamp - only process lines with timestamps
     const timeRegex = /(\d{1,2}:)?(\d{1,2}):(\d{1,2})/;
     const timeMatch = line.match(timeRegex);
     
-      if (timeMatch) {
+    if (timeMatch) {
       // Extract the timestamp part
       const timeStartIndex = timeMatch.index;
       const timeEndIndex = timeMatch.index + timeMatch[0].length;
@@ -181,22 +176,24 @@ function parseTimestamps(text, source = 'unknown') {
         timestampLogger.debug(`  Using next line for content: "${remainingText}"`);
       }
       
-      // Skip timestamps that contain announcements in comments
-      if (
-        (source === 'comment' && remainingText.startsWith('告知')) ||
-        remainingText.includes('告知:')
-      ) {
+      // Skip timestamps that contain "告知" (announcement)
+      if (remainingText.includes('告知')) {
         timestampLogger.debug(`Skipping timestamp: ${originalTime} (announcement)`);
         continue;
       }
       
-      // Skip 0-second timestamps only for comments
-      if (time === 0 && source === 'comment') {
-        timestampLogger.debug(`Skipping timestamp: ${originalTime} (zero seconds in comment)`);
+      // Skip timestamps that are just "声入り" (with voice)
+      if (remainingText.trim() === '声入り') {
+        timestampLogger.debug(`Skipping timestamp: ${originalTime} (声入り - with voice)`);
         continue;
       }
       
-      // Note: We keep 0-second timestamps for descriptions to identify chapter markers
+      // Skip 0-second timestamps for all sources but remember their presence
+      if (time === 0) {
+        hasZeroTimestampDetected = true;
+        timestampLogger.debug(`Skipping timestamp: ${originalTime} (zero seconds in ${source})`);
+        continue;
+      }
       
       // Try to find a delimiter (/ or -) in the text
       // Look for specific delimiter patterns with proper whitespace to avoid matching hyphens within words
@@ -246,6 +243,16 @@ function parseTimestamps(text, source = 'unknown') {
   }
   
   timestampLogger.log(`Found ${timestamps.length} timestamps in total`);
+  
+  if (hasZeroTimestampDetected) {
+    Object.defineProperty(timestamps, 'hasZeroTimestamp', {
+      value: true,
+      enumerable: false,
+      configurable: true,
+      writable: false
+    });
+  }
+  
   return timestamps;
 }
 
@@ -308,119 +315,76 @@ function findOrCreateArtist(artistName, artists) {
 }
 
 /**
- * Normalize song title by removing "（オリ曲）" or "(オリ曲)" patterns
- * @param {string} songTitle - Song title
- * @returns {string} Normalized song title
- */
-function normalizeSongTitle(songTitle) {
-  return songTitle
-    .replace(/[（(]オリ曲[）)]/g, '')
-    .replace(/\s*\(オリ曲\)\s*/g, '')
-    .replace(/\s*（オリ曲）\s*/g, '')
-    .trim();
-}
-
-/**
  * Find or create song
  * @param {string} songTitle - Song title
  * @param {Array} artistIds - Artist IDs
  * @param {Array} songs - Existing songs
  * @returns {Object} Song ID and whether it was newly created
  */
-function findOrCreateSong(songTitle, artistIds, songs) {
-  // Normalize song title for comparison
+function findSongByTitleOnly(songTitle, songs) {
   const normalizedTitle = songTitle.normalize('NFC').toLocaleLowerCase('ja');
-  const normalizedTitleWithoutOriSong = normalizeSongTitle(normalizedTitle);
   
-  // First, try to find an exact match with artist IDs
-  let exactMatches = [];
+  return songs.find(song => {
+    const songTitleNormalized = song.title.normalize('NFC').toLocaleLowerCase('ja');
+    if (songTitleNormalized === normalizedTitle) {
+      return true;
+    }
+    
+    if (!song.alternate_titles) {
+      return false;
+    }
+    
+    return song.alternate_titles.some(title =>
+      title.normalize('NFC').toLocaleLowerCase('ja') === normalizedTitle
+    );
+  });
+}
+
+function findOrCreateSong(songTitle, artistIds, songs) {
+  const normalizedTitle = songTitle.normalize('NFC').toLocaleLowerCase('ja');
   
   // Check if song already exists
-  for (const song of songs) {
+  const existingSong = songs.find(song => {
     // Check primary title
     const songTitleNormalized = song.title.normalize('NFC').toLocaleLowerCase('ja');
-    const songTitleNormalizedWithoutOriSong = normalizeSongTitle(songTitleNormalized);
-    
-    // Check for title match (with or without "オリ曲" suffix)
-    const titleMatches = 
-      songTitleNormalized === normalizedTitle || 
-      songTitleNormalizedWithoutOriSong === normalizedTitleWithoutOriSong;
-    
-    if (titleMatches) {
-      // If either artistIds or song.artist_ids is empty, add to matches
+    if (songTitleNormalized === normalizedTitle) {
+      // If either artistIds or song.artist_ids is empty, match by title only
       if (artistIds.length === 0 || song.artist_ids.length === 0) {
-        exactMatches.push(song);
-        continue;
+        return true;
       }
       
       // Check if any of the artist IDs match
       const artistMatch = song.artist_ids.some(id => artistIds.includes(id)) ||
                          artistIds.some(id => song.artist_ids.includes(id));
       if (artistMatch) {
-        // If we have artist match, this is the best match possible
-        return { songId: song.song_id, isNew: false };
-      } else {
-        // Title matches but artist doesn't - add to potential matches
-        exactMatches.push(song);
+        return true;
       }
     }
     
     // Check alternate titles
     if (song.alternate_titles) {
-      for (const title of song.alternate_titles) {
+      return song.alternate_titles.some(title => {
         const altTitleNormalized = title.normalize('NFC').toLocaleLowerCase('ja');
-        const altTitleNormalizedWithoutOriSong = normalizeSongTitle(altTitleNormalized);
-        
-        // Check for alternate title match (with or without "オリ曲" suffix)
-        const altTitleMatches = 
-          altTitleNormalized === normalizedTitle || 
-          altTitleNormalizedWithoutOriSong === normalizedTitleWithoutOriSong;
-        
-        if (altTitleMatches) {
-          // If either artistIds or song.artist_ids is empty, add to matches
+        if (altTitleNormalized === normalizedTitle) {
+          // If either artistIds or song.artist_ids is empty, match by title only
           if (artistIds.length === 0 || song.artist_ids.length === 0) {
-            exactMatches.push(song);
-            break;
+            return true;
           }
           
-          // Check if any of the artist IDs match
-          const artistMatch = song.artist_ids.some(id => artistIds.includes(id)) ||
-                             artistIds.some(id => song.artist_ids.includes(id));
-          if (artistMatch) {
-            // If we have artist match, this is the best match possible
-            return { songId: song.song_id, isNew: false };
-          } else {
-            // Title matches but artist doesn't - add to potential matches
-            exactMatches.push(song);
-            break;
-          }
+          return (song.artist_ids.some(id => artistIds.includes(id)) ||
+                  artistIds.some(id => song.artist_ids.includes(id)));
         }
-      }
+        return false;
+      });
     }
-  }
+    
+    return false;
+  });
   
-  // If we have exact title matches but no artist match, prioritize songs by 七篠さよ
-  // This handles the case where a comment only includes the song title
-  if (exactMatches.length > 0) {
-    let existingSong = null;
-    
-    // 七篠さよのIDを含む曲を優先
-    // Prioritize songs by 七篠さよ (artist_id: irSwKLQP04X)
-    for (const song of exactMatches) {
-      if (song.artist_ids.includes('irSwKLQP04X')) {
-        existingSong = song;
-        break;
-      }
-    }
-    
-    // 七篠さよの曲が見つからなければ最初の曲を使用
-    // If no song by 七篠さよ is found, use the first match
-    if (!existingSong) {
-      existingSong = exactMatches[0];
-    }
-    
-    // 既存の曲が見つかった場合は、artist_idsを更新せずにそのまま返す
-    // Return existing song without updating artist_ids
+  if (existingSong) {
+    // If the song exists but doesn't have all the artists, add the missing ones
+    const updatedArtistIds = [...new Set([...existingSong.artist_ids, ...artistIds])];
+    existingSong.artist_ids = updatedArtistIds;
     return { songId: existingSong.song_id, isNew: false };
   }
   
@@ -469,6 +433,14 @@ function updateArtistsJson(artistsData) {
  * @returns {boolean} True if a zero timestamp is found
  */
 function hasZeroTimestamp(timestamps) {
+  if (!timestamps) {
+    return false;
+  }
+  
+  if (Object.prototype.hasOwnProperty.call(timestamps, 'hasZeroTimestamp')) {
+    return Boolean(timestamps.hasZeroTimestamp);
+  }
+  
   return timestamps.some(ts => 
     ts.time === 0 || 
     ts.original_time.match(/^(0:00|00:00|0:00:00|00:00:00)$/)
@@ -479,9 +451,13 @@ function hasZeroTimestamp(timestamps) {
  * Process video data and update JSON files
  * @param {string} videoId - YouTube video ID
  */
-async function processVideo(videoId) {
+async function processVideo(videoId, options = {}) {
   try {
+    const { useUserComment = false } = options;
     logger.log(`Processing video: ${videoId}`);
+    if (useUserComment) {
+      logger.log('User comment option enabled: ignoring description timestamps');
+    }
     
     // Fetch video details
     const videoResponse = await fetchVideoDetails(videoId);
@@ -499,16 +475,18 @@ async function processVideo(videoId) {
                          thumbnails.default.url;
     
     // Parse timestamps from description
-    const descriptionTimestamps = parseTimestamps(description, 'description');
+    const descriptionTimestamps = useUserComment
+      ? []
+      : parseTimestamps(description, 'description');
     timestampLogger.log(`Found ${descriptionTimestamps.length} timestamps in description`);
     
     // Check if description has a timestamp at 0:00 (indicating chapter markers)
-    const hasZeroTime = hasZeroTimestamp(descriptionTimestamps);
+    const hasZeroTime = useUserComment ? false : hasZeroTimestamp(descriptionTimestamps);
     timestampLogger.log(`Description has zero timestamp: ${hasZeroTime}`);
     
     // Fetch comments if description doesn't have valid timestamps with 0:00 marker
     let commentTimestamps = [];
-    if (descriptionTimestamps.length === 0 || !hasZeroTime) {
+    if (useUserComment || descriptionTimestamps.length === 0 || !hasZeroTime) {
       const comments = await fetchVideoComments(videoId);
       commentLogger.log(`Fetched ${comments.length} comments`);
       
@@ -552,16 +530,22 @@ async function processVideo(videoId) {
     }
     
     // タイムスタンプの優先順位決定
+    // 0. --user-comment オプションがある場合はコメントのみ使用
     // 1. 摘要欄に0秒のタイムスタンプがある場合（チャプターマーカーと判断）→ 摘要欄のタイムスタンプを使用
     // 2. 摘要欄に0秒のタイムスタンプがない場合 → コメントのタイムスタンプを使用（あれば）
     // 3. コメントにタイムスタンプがない場合 → 摘要欄のタイムスタンプを使用（フォールバック）
-    const allTimestamps = (descriptionTimestamps.length > 0 && hasZeroTime)
-      ? descriptionTimestamps 
-      : (commentTimestamps.length > 0 ? commentTimestamps : descriptionTimestamps);
+    const allTimestamps = useUserComment
+      ? commentTimestamps
+      : (descriptionTimestamps.length > 0 && hasZeroTime)
+        ? descriptionTimestamps 
+        : (commentTimestamps.length > 0 ? commentTimestamps : descriptionTimestamps);
     
     timestampLogger.log(`Using ${allTimestamps.length} timestamps from ${
-      (descriptionTimestamps.length > 0 && hasZeroTime) ? 'description' : 
-      (commentTimestamps.length > 0 ? 'comments' : 'description (fallback)')
+      useUserComment
+        ? 'comments (user option)'
+        : (descriptionTimestamps.length > 0 && hasZeroTime)
+          ? 'description'
+          : (commentTimestamps.length > 0 ? 'comments' : 'description (fallback)')
     }`);
     
     // Load existing data
@@ -574,35 +558,44 @@ async function processVideo(videoId) {
     const newSongs = [];
     
     for (const timestamp of allTimestamps) {
-      // Check if artist name contains commas for multiple artists
-      const artistNames = timestamp.artist_name.includes(', ') || timestamp.artist_name.includes(',')
-        ? timestamp.artist_name.split(/,\s*/).map(name => name.trim())
-        : [timestamp.artist_name];
+      const allKnownSongs = [...songsData.songs, ...newSongs];
+      const trimmedArtistField = (timestamp.artist_name || '').trim();
+      let artistIds = [];
       
-      // Find or create each artist and collect their IDs
-      const artistIds = [];
-      
-      for (const artistName of artistNames) {
-        const { artistId, isNew: isNewArtist } = findOrCreateArtist(
-          artistName, 
-          [...artistsData.artists, ...newArtists]
-        );
+      if (trimmedArtistField) {
+        const artistNames = trimmedArtistField.includes(', ') || trimmedArtistField.includes(',')
+          ? trimmedArtistField.split(/,\s*/).map(name => name.trim()).filter(Boolean)
+          : [trimmedArtistField];
         
-        artistIds.push(artistId);
+        for (const artistName of artistNames) {
+          const { artistId, isNew: isNewArtist } = findOrCreateArtist(
+            artistName,
+            [...artistsData.artists, ...newArtists]
+          );
+          
+          if (!artistIds.includes(artistId)) {
+            artistIds.push(artistId);
+          }
+          
+          if (isNewArtist) {
+            newArtists.push({
+              artist_id: artistId,
+              name: artistName
+            });
+          }
+        }
+      } else {
+        const matchedSong = findSongByTitleOnly(timestamp.song_title, allKnownSongs);
         
-        if (isNewArtist) {
-          newArtists.push({
-            artist_id: artistId,
-            name: artistName
-          });
+        if (matchedSong) {
+          artistIds = [...(matchedSong.artist_ids || [])];
         }
       }
-      
-      // Find or create song
+
       const { songId, isNew: isNewSong } = findOrCreateSong(
         timestamp.song_title,
         artistIds,
-        [...songsData.songs, ...newSongs]
+        allKnownSongs
       );
       
       if (isNewSong) {
@@ -618,8 +611,9 @@ async function processVideo(videoId) {
         time: timestamp.time,
         original_time: timestamp.original_time,
         song_id: songId,
-        comment_source: (descriptionTimestamps.length > 0 && hasZeroTime && allTimestamps === descriptionTimestamps) 
-          ? 'description' 
+        comment_source: (!useUserComment && descriptionTimestamps.length > 0 && hasZeroTime &&
+          allTimestamps === descriptionTimestamps)
+          ? 'description'
           : 'comment',
         comment_date: timestamp.comment_date
       });
@@ -661,12 +655,14 @@ async function processVideo(videoId) {
 // Main function
 async function main() {
   try {
-    const videoId = process.argv[2];
+    const args = process.argv.slice(2);
+    const useUserComment = args.includes('--user-comment');
+    const videoId = args.find(arg => !arg.startsWith('-'));
     if (!videoId) {
       throw new Error('Video ID is required as a command line argument');
     }
     
-    await processVideo(videoId);
+    await processVideo(videoId, { useUserComment });
     
     // Generate videos list after processing the video
     logger.log('Generating videos list...');
@@ -703,8 +699,8 @@ export {
   convertTimeToSeconds,
   parseTimestamps,
   findOrCreateArtist,
+  findSongByTitleOnly,
   findOrCreateSong,
-  normalizeSongTitle,
   hasZeroTimestamp,
   processVideo,
   main
