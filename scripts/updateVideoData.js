@@ -175,8 +175,8 @@ function parseTimestamps(text, source = 'unknown') {
         timestampLogger.debug(`  Using next line for content: "${remainingText}"`);
       }
       
-      // Skip timestamps that contain "告知:" (announcement)
-      if (remainingText.includes('告知:')) {
+      // Skip timestamps that contain "告知" (announcement)
+      if (remainingText.includes('告知')) {
         timestampLogger.debug(`Skipping timestamp: ${originalTime} (announcement)`);
         continue;
       }
