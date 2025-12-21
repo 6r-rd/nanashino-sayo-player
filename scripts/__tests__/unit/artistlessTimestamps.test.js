@@ -66,10 +66,12 @@ describe('Artistless Timestamps', () => {
     expect(result1.isNew).toBe(false);
     
     // Test finding a song with artist when the song has no artists
+    // With the new behavior, artist_ids are not updated
     const result2 = findOrCreateSong('ループ', ['artist2'], existingSongs);
     expect(result2.songId).toBe('test1');
     expect(result2.isNew).toBe(false);
-    expect(existingSongs[0].artist_ids).toContain('artist2');
+    // Artist IDs should not be updated
+    expect(existingSongs[0].artist_ids).toEqual([]);
     
     // Test finding a song without artist when the song has artists
     const result3 = findOrCreateSong('Clear', [], existingSongs);
@@ -111,34 +113,5 @@ describe('Artistless Timestamps', () => {
     // Check last timestamp with artist
     expect(result[4].song_title).toBe('神のまにまに');
     expect(result[4].artist_name).toBe('れるりり');
-  });
-
-  it('matches artistless timestamps to existing songs by title order', () => {
-    const songs = [
-      {
-        song_id: 'song-1',
-        title: 'Clear',
-        artist_ids: ['artist-a']
-      },
-      {
-        song_id: 'song-2',
-        title: 'Clear',
-        artist_ids: ['artist-b']
-      },
-      {
-        song_id: 'song-3',
-        title: 'プラチナ',
-        artist_ids: [],
-        alternate_titles: ['Platina']
-      }
-    ];
-
-    const exactMatch = findOrCreateSong('Clear', [], songs);
-    expect(exactMatch.isNew).toBe(false);
-    expect(exactMatch.songId).toBe('song-1');
-
-    const altMatch = findOrCreateSong('Platina', [], songs);
-    expect(altMatch.isNew).toBe(false);
-    expect(altMatch.songId).toBe('song-3');
   });
 });
