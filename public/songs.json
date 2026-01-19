@@ -7845,12 +7845,16 @@
     {
       "song_id": "wUChAIo0HI_",
       "title": "タイムマシン",
-      "artist_ids": []
+      "artist_ids": [
+        "1640mP"
+      ]
     },
     {
       "song_id": "fv4VF2nYWXr",
       "title": "Amber",
-      "artist_ids": []
+      "artist_ids": [
+        "I2jFO5hFI4m"
+      ]
     }
   ]
 }
