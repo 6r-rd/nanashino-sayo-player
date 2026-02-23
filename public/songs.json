@@ -76,7 +76,8 @@
       "title": "怪獣",
       "artist_ids": [
         "G1baoTjM0Ow"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=_tV_yrHcJ2A"
     },
     {
       "song_id": "DNN-BeLM602",
@@ -167,7 +168,8 @@
       "title": "星のあしあと",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=Zg4P7LHt-p0"
     },
     {
       "song_id": "hbFlusmlPTf",
@@ -574,7 +576,8 @@
       "title": "BrokenDaybreak",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=z4r3l2aAdrg"
     },
     {
       "song_id": "c9BZizEuL4S",
@@ -966,21 +969,24 @@
       "title": "エンドロールには載らない君へ",
       "artist_ids": [
         "WU226uDdZci"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=A-frorIJaWg"
     },
     {
       "song_id": "Ea51NHwjKlm",
       "title": "白雨より",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=YS2GB8jT6VI"
     },
     {
       "song_id": "5w6j-oURSTy",
       "title": "BEYOND",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=BZHoz12CODU"
     },
     {
       "song_id": "A2Pda_hjU9o",
@@ -1086,21 +1092,24 @@
       "title": "神のまにまに",
       "artist_ids": [
         "LHgQgsmagAc"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=5Jnf9DoSAOw"
     },
     {
       "song_id": "3cJvA0YDnBH",
       "title": "サヨナラキドリ",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=xRsKDTF3FYA"
     },
     {
       "song_id": "JpR9T9BVo6K",
       "title": "夜とスピカ",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=9oaiqLZUp_U"
     },
     {
       "song_id": "cIiljzz7Bbf",
@@ -1697,7 +1706,8 @@
       "title": "Alternative",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=5A5nDCQHudA"
     },
     {
       "song_id": "x9cBMnc3ChW",
@@ -1866,7 +1876,8 @@
       "title": "涙の種、笑顔の花",
       "artist_ids": [
         "aqB4b9KkcqQ"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=1M5YPc9HZIQ"
     },
     {
       "song_id": "H9UI9opa2oB",
@@ -1894,7 +1905,8 @@
       "title": "Starry",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=qKWMZ44Jr8g"
     },
     {
       "song_id": "LrWHJIVgjq5",
@@ -1950,7 +1962,8 @@
       "title": "色、一振り。",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=Uhx1h3cDFck"
     },
     {
       "song_id": "TjWXvZumyKC",
@@ -2091,7 +2104,8 @@
       "artist_ids": [
         "sEnvLc_ebPu",
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=UshxuFlxPxk"
     },
     {
       "song_id": "yVrvO1Y7-ry",
@@ -2108,60 +2122,28 @@
       ]
     },
     {
-      "song_id": "T0QLo1ndQKw",
-      "title": "サヨナラキドリ",
-      "artist_ids": [
-        "irSwKLQP04X"
-      ]
-    },
-    {
-      "song_id": "qo0yiVvSrUZ",
-      "title": "色、一振り。",
-      "artist_ids": [
-        "irSwKLQP04X"
-      ]
-    },
-    {
-      "song_id": "ne3SRjeX-x0",
-      "title": "Supernova",
-      "artist_ids": [
-        "irSwKLQP04X"
-      ]
-    },
-    {
       "song_id": "vjoK8lZ1xcH",
       "title": "starry",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=qKWMZ44Jr8g"
     },
     {
       "song_id": "cbG8awRi3le",
       "title": "ぐるり☆めぐり",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
-    },
-    {
-      "song_id": "S2cXB9x0q6E",
-      "title": "BrokenDaybreak",
-      "artist_ids": [
-        "irSwKLQP04X"
-      ]
-    },
-    {
-      "song_id": "d87vdZKB53A",
-      "title": "BEYOND",
-      "artist_ids": [
-        "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=fs0ZJBr5nEA"
     },
     {
       "song_id": "05k3m0YTQBN",
       "title": "身勝手なサイコパス",
       "artist_ids": [
         "JKFE931jfva"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=U-d8WeIQqk4"
     },
     {
       "song_id": "HnNT-VS6oHU",
@@ -3017,7 +2999,8 @@
       "title": "気分上々↑↑",
       "artist_ids": [
         "clO12-kPGXN"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=2bdUNFvWdAg"
     },
     {
       "song_id": "yzBgAmPju9w",
@@ -3164,7 +3147,8 @@
       "title": "神っぽいな",
       "artist_ids": [
         "bxi3HaHnXH2"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=LbKOMU9DTyY"
     },
     {
       "song_id": "M4ODxqZBP9S",
@@ -3389,7 +3373,8 @@
       "title": "Lamp",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=DT28g2Ykmj4"
     },
     {
       "song_id": "GEQ_08UyU5D",
@@ -3431,21 +3416,24 @@
       "title": "ステラリネア",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=R9CZIwPXpQs"
     },
     {
       "song_id": "xT0bAaVcxux",
       "title": "七等星",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=9sgwWCwlIPM"
     },
     {
       "song_id": "uvIBrdDF9_2",
       "title": "ミルキーウェイ",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=uD5eAuWM9nk"
     },
     {
       "song_id": "0E-Y4uGrL35",
@@ -4231,7 +4219,8 @@
       "title": "夜のピエロ",
       "artist_ids": [
         "5ArUGmm_5eP"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=94lg45L_HxA"
     },
     {
       "song_id": "R9ufr_Jy97N",
@@ -4407,7 +4396,8 @@
       "artist_ids": [
         "AJpskg40ihg",
         "7zjCwMSBA9x"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=sg_o9l816cU"
     },
     {
       "song_id": "HyVy050hJ3Z",
@@ -4646,14 +4636,16 @@
       "title": "ロンリーユニバース",
       "artist_ids": [
         "RLgNkNQCewt"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=lU89NdUnSs4"
     },
     {
       "song_id": "NvxTp9A-fRf",
       "title": "波に名前をつけること、僕らの呼吸に終わりがあること。",
       "artist_ids": [
         "wupRhm_p_hw"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=wz_eUJKJZwQ"
     },
     {
       "song_id": "bIkCEgAbPFO",
@@ -5784,7 +5776,8 @@
       "title": "オトナブルー",
       "artist_ids": [
         "cGXiqiZUAYr"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=LbpXMV7DoUY"
     },
     {
       "song_id": "i26_6Tzh_9j",
@@ -6169,7 +6162,8 @@
       "title": "絆ノ奇跡",
       "artist_ids": [
         "j8gGIWJEKWa"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=esolZ3__b6U"
     },
     {
       "song_id": "KIwo066d5p9",
@@ -6428,7 +6422,8 @@
       "title": "幽霊東京",
       "artist_ids": [
         "Y751jupXkqf"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=_u2_O1NUk-A"
     },
     {
       "song_id": "Ssca9gsgnNF",
@@ -6932,7 +6927,8 @@
       "title": "ワタシイロ",
       "artist_ids": [
         "irSwKLQP04X"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=uyyjGMf_Gzk"
     },
     {
       "song_id": "nMMkRHscIOK",
@@ -7079,7 +7075,8 @@
       "title": "文学講義",
       "artist_ids": [
         "2b3d3ct35EP"
-      ]
+      ],
+      "description": "コラボ歌ってみたあります https://www.youtube.com/watch?v=WKVN79Hjz98"
     },
     {
       "song_id": "P4dPbZpgaNS",
@@ -7282,21 +7279,24 @@
       "title": "惑星コネクト",
       "artist_ids": [
         "fQ7OFF8d1ab"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=ijxGmIT1n0g"
     },
     {
       "song_id": "E9Bq9wn0kaX",
       "title": "Cotton Blue",
       "artist_ids": [
         "KFGr32gfasK"
-      ]
+      ],
+      "description": "MV https://www.youtube.com/watch?v=EhpZ8b457w8"
     },
     {
       "song_id": "MvnnrX02dQJ",
       "title": "溶け込んだシアン",
       "artist_ids": [
-        "JKFE931jfva"
-      ]
+        "KFGr32gfasK"
+      ],
+      "description":"MV https://www.youtube.com/watch?v=P7vibgC7qdA"
     },
     {
       "song_id": "TyFN82ohuEv",
@@ -7864,19 +7864,12 @@
       ]
     },
     {
-      "song_id": "Iq84UT85_cb",
-      "title": "再会",
-      "artist_ids": [
-        "7zjCwMSBA9x",
-        "AJpskg40ihg"
-      ]
-    },
-    {
       "song_id": "2kwDgImu82v",
       "title": "ワールドイズマイン CPK! Remix",
       "artist_ids": [
         "Z3j9RhG6IRV"
-      ]
+      ],
+      "description": "歌ってみたあります https://www.youtube.com/watch?v=g3i7Av6Oi20"
     },
     {
       "song_id": "FY3Cjoqc65j",

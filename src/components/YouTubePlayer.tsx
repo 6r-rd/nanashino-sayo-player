@@ -4,8 +4,10 @@ import { Slider } from "@/components/ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { HoverPopover } from "@/components/ui/hover-popover";
 import { Progress } from "@/components/ui/progress";
+import { DescriptionPopoverContent } from "@/components/DescriptionPopoverContent";
 import { Info } from "lucide-react";
 import { createNamespacedLogger } from "@/lib/debug";
+import { buildDescriptionPreview } from "@/lib/descriptionLink";
 
 // YouTubePlayer コンポーネント用のロガーを作成
 const logger = createNamespacedLogger('ui:player');
@@ -254,31 +256,6 @@ export function YouTubePlayer({ videoId, timestamps, startTime: propStartTime }:
     };
   }, [startTime, jumpToTimestamp]);
 
-
-  // 最初の URL を抽出する関数
-  const extractFirstUrl = (text: string): string | null => {
-    if (!text) return null;
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const match = text.match(urlRegex);
-    return match ? match[0] : null;
-  };
-  
-  // URL を短く表示する関数
-  const formatDescription = (text: string): string => {
-    if (!text) return '';
-    
-    return text.replace(/(https?:\/\/[^\s]+)/g, (url) => {
-      try {
-        // URL を短く表示（例：https://example.com/...）
-        const urlObj = new URL(url);
-        return `${urlObj.origin}/...`;
-      } catch (e) {
-        // 無効な URL の場合は元のテキストを返す
-        return url;
-      }
-    });
-  };
-
   return (
     <div className="flex flex-col space-y-4">
       {/* YouTube Player */}
@@ -319,42 +296,44 @@ export function YouTubePlayer({ videoId, timestamps, startTime: propStartTime }:
             </TableRow>
           </TableHeader>
           <TableBody>
-            {timestamps.map((timestamp, index) => (
-              timestamp.description ? (
-                <TableRow 
-                  key={index}
-                  className={`cursor-pointer relative group hover:bg-muted/50 ${currentSongIndex === index ? 'bg-primary/10' : ''}`}
-                  onClick={() => jumpToTimestamp(timestamp.time)}
-                >
-                  <TableCell className="font-mono relative">
-                    {timestamp.original_time}
-                    
-                    <HoverPopover
-                      side="left"
-                      align="start"
-                      contentClassName="max-w-[350px] p-4 break-words"
-                      onContentClick={(e: React.MouseEvent) => {
-                        e.stopPropagation();
-                        const firstUrl = extractFirstUrl(timestamp.description || '');
-                        if (firstUrl) {
-                          window.open(firstUrl, '_blank', 'noopener,noreferrer');
-                        }
-                      }}
-                      content={
-                        <p className="text-sm whitespace-normal">
-                          {formatDescription(timestamp.description || '')}
-                        </p>
-                      }
-                    >
-                      <span className="inline-block ml-2 cursor-pointer">
-                        <Info className="h-4 w-4 text-blue-500" />
-                      </span>
-                    </HoverPopover>
-                  </TableCell>
-                  <TableCell>{timestamp.song_title || `Song ${index + 1}`}</TableCell>
-                  <TableCell className="hidden md:table-cell">{timestamp.artist_name || ''}</TableCell>
-                </TableRow>
-              ) : (
+            {timestamps.map((timestamp, index) => {
+              if (timestamp.description) {
+                const description = timestamp.description || "";
+                const preview = buildDescriptionPreview(description);
+
+                return (
+                  <TableRow 
+                    key={index}
+                    className={`cursor-pointer relative group hover:bg-muted/50 ${currentSongIndex === index ? 'bg-primary/10' : ''}`}
+                    onClick={() => jumpToTimestamp(timestamp.time)}
+                  >
+                    <TableCell className="font-mono relative">
+                      {timestamp.original_time}
+                      
+                      <HoverPopover
+                        side="left"
+                        align="start"
+                        contentClassName="w-[350px] max-w-[85vw] p-0 overflow-hidden break-words"
+                        onContentClick={(e: React.MouseEvent) => {
+                          e.stopPropagation();
+                          if (preview.url) {
+                            window.open(preview.url, "_blank", "noopener,noreferrer");
+                          }
+                        }}
+                        content={<DescriptionPopoverContent description={description} />}
+                      >
+                        <span className="inline-block ml-2 cursor-pointer">
+                          <Info className="h-4 w-4 text-blue-500" />
+                        </span>
+                      </HoverPopover>
+                    </TableCell>
+                    <TableCell>{timestamp.song_title || `Song ${index + 1}`}</TableCell>
+                    <TableCell className="hidden md:table-cell">{timestamp.artist_name || ''}</TableCell>
+                  </TableRow>
+                );
+              }
+
+              return (
                 <TableRow 
                   key={index}
                   className={`cursor-pointer hover:bg-muted/50 ${currentSongIndex === index ? 'bg-primary/10' : ''}`}
@@ -364,8 +343,8 @@ export function YouTubePlayer({ videoId, timestamps, startTime: propStartTime }:
                   <TableCell>{timestamp.song_title || `Song ${index + 1}`}</TableCell>
                   <TableCell className="hidden md:table-cell">{timestamp.artist_name || ''}</TableCell>
                 </TableRow>
-              )
-            ))}
+              );
+            })}
             {timestamps.length === 0 && (
               <TableRow>
                 <TableCell colSpan={3} className="text-center py-4 text-muted-foreground">
