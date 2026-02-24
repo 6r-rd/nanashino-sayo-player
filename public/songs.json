@@ -7296,7 +7296,7 @@
       "artist_ids": [
         "KFGr32gfasK"
       ],
-      "description":"MV https://www.youtube.com/watch?v=P7vibgC7qdA"
+      "description": "MV https://www.youtube.com/watch?v=P7vibgC7qdA"
     },
     {
       "song_id": "TyFN82ohuEv",
@@ -7925,6 +7925,27 @@
       "title": "ジターバグ",
       "artist_ids": [
         "OAX1Owbnl_l"
+      ]
+    },
+    {
+      "song_id": "EQrX1FSst8f",
+      "title": "影色舞",
+      "artist_ids": [
+        "Smex4O5PpZC"
+      ]
+    },
+    {
+      "song_id": "nHah5ku7K9O",
+      "title": "春日影",
+      "artist_ids": [
+        "Smex4O5PpZC"
+      ]
+    },
+    {
+      "song_id": "S1zPrOUnYDE",
+      "title": "歌いましょう鳴らしましょう",
+      "artist_ids": [
+        "Smex4O5PpZC"
       ]
     }
   ]
