@@ -7951,12 +7951,16 @@
     {
       "song_id": "NhBloLvbpL-",
       "title": "アカシア",
-      "artist_ids": []
+      "artist_ids": [
+        "oA6KqRrYaMl"
+      ]
     },
     {
       "song_id": "HWFhkXeGasJ",
       "title": "familie",
-      "artist_ids": []
+      "artist_ids": [
+        "IVunvNtaGJH"
+      ]
     }
   ]
 }
