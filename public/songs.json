@@ -7965,22 +7965,23 @@
     {
       "song_id": "GdMmoQibTID",
       "title": "lulu.",
-      "artist_ids": []
+      "artist_ids": [
+        "IVunvNtaGJH"
+      ]
     },
     {
       "song_id": "SqwQ6Zza4Qh",
       "title": "プラネテス",
-      "artist_ids": []
+      "artist_ids": [
+        "EiT4AUCk5wi"
+      ]
     },
     {
       "song_id": "aXCeYLnx5hO",
-      "title": "ΑΙΖΟ",
-      "artist_ids": []
-    },
-    {
-      "song_id": "Y1exvq6KVaH",
-      "title": "ΒΟΥ",
-      "artist_ids": []
+      "title": "AIZO",
+      "artist_ids": [
+        "UVkfUP_an0V"
+      ]
     }
   ]
 }
