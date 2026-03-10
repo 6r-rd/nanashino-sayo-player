@@ -7986,17 +7986,24 @@
     {
       "song_id": "gqVh7HzGHXB",
       "title": "月光",
-      "artist_ids": []
+      "artist_ids": [
+        "wupRhm_p_hw",
+        "UjSEszDVW-j"
+      ]
     },
     {
       "song_id": "iAPF1BwHHTD",
       "title": "SKILL",
-      "artist_ids": []
+      "artist_ids": [
+        "FhkI1qPVmie"
+      ]
     },
     {
       "song_id": "sop1y7-tODO",
       "title": "ライトダンス",
-      "artist_ids": []
+      "artist_ids": [
+        "G1baoTjM0Ow"
+      ]
     }
   ]
 }
