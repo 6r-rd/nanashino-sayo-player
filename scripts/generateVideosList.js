@@ -62,7 +62,7 @@ function generateVideosList() {
 }
 
 // Run the function if this is the main module and not in a test environment
-if (import.meta.url.endsWith('generateVideosList.js') && !process.env.VITEST) {
+if (process.argv[1] === __filename && !process.env.VITEST) {
   generateVideosList();
 }
 
