@@ -37,6 +37,13 @@ When running via npm:
 npm run update-video -- VIDEO_ID --user-comment
 ```
 
+The `--` after `update-video` is required so npm passes the video ID to the script.
+For video IDs that start with a hyphen, use the same form:
+
+```bash
+npm run update-video -- -LLazRXLn0Y
+```
+
 The script will:
 
 1. Fetch video details from the YouTube API

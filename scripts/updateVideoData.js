@@ -652,12 +652,40 @@ async function processVideo(videoId, options = {}) {
   }
 }
 
+function parseCliArgs(args) {
+  let useUserComment = false;
+  let videoId;
+  let positionalOnly = false;
+
+  for (const arg of args) {
+    if (!positionalOnly && arg === '--') {
+      positionalOnly = true;
+      continue;
+    }
+
+    if (!positionalOnly && arg === '--user-comment') {
+      useUserComment = true;
+      continue;
+    }
+
+    if (!positionalOnly && arg.startsWith('--')) {
+      throw new Error(`Unknown option: ${arg}`);
+    }
+
+    if (videoId) {
+      throw new Error(`Unexpected argument: ${arg}`);
+    }
+
+    videoId = arg;
+  }
+
+  return { videoId, useUserComment };
+}
+
 // Main function
 async function main() {
   try {
-    const args = process.argv.slice(2);
-    const useUserComment = args.includes('--user-comment');
-    const videoId = args.find(arg => !arg.startsWith('-'));
+    const { videoId, useUserComment } = parseCliArgs(process.argv.slice(2));
     if (!videoId) {
       throw new Error('Video ID is required as a command line argument');
     }
@@ -686,7 +714,7 @@ if (!process.env.YOUTUBE_API_KEY) {
 }
 
 // Run main function if this is the main module and not being imported for tests
-if (import.meta.url.endsWith('updateVideoData.js') && !process.env.VITEST) {
+if (process.argv[1] === __filename && !process.env.VITEST) {
   logger.log('Running main function...');
   main().catch(err => {
     logger.error('Error in main function:', err);
@@ -702,6 +730,7 @@ export {
   findSongByTitleOnly,
   findOrCreateSong,
   hasZeroTimestamp,
+  parseCliArgs,
   processVideo,
   main
 };

@@ -8,7 +8,7 @@ dotenv.config();
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { generateVideosList } from './generateVideosList.js';
 import { createNamespacedLogger } from './debug.js';
 import { loadExcludedVideoIds } from './excludedVideoIds.js';
@@ -90,7 +90,7 @@ function processVideo(videoId) {
   
   try {
     // Run the updateVideoData script with node
-    execSync(`node scripts/updateVideoData.js ${videoId}`, {
+    execFileSync('node', ['scripts/updateVideoData.js', videoId], {
       stdio: 'inherit',
       env: process.env
     });
