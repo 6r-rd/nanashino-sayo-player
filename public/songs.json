@@ -8311,17 +8311,23 @@
     {
       "song_id": "34YCKrlzLpX",
       "title": "butterfly swimmer",
-      "artist_ids": []
+      "artist_ids": [
+        "IdMCqnF5vXI"
+      ]
     },
     {
       "song_id": "CU9f3QnwRAg",
       "title": "Eureka",
-      "artist_ids": []
+      "artist_ids": [
+        "8tsKEr9cmrX"
+      ]
     },
     {
       "song_id": "KbC8eMVaR6W",
       "title": "マイガール",
-      "artist_ids": []
+      "artist_ids": [
+        "h7kj860OyvV"
+      ]
     }
   ]
 }
