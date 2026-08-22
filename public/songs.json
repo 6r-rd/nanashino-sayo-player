@@ -8423,12 +8423,9 @@
     {
       "song_id": "QP-BTAZkwf4",
       "title": "うたかた花火",
-      "artist_ids": []
-    },
-    {
-      "song_id": "rHahhrK0eXN",
-      "title": "secret base 〜君がくれたもの〜",
-      "artist_ids": []
+      "artist_ids": [
+        "Z3j9RhG6IRV"
+      ]
     }
   ]
 }
