@@ -8430,17 +8430,23 @@
     {
       "song_id": "OUrpwz_HdOS",
       "title": "Hi FiVE!",
-      "artist_ids": []
+      "artist_ids": [
+        "7zjCwMSBA9x"
+      ]
     },
     {
       "song_id": "UnBwNynwjmR",
       "title": "city",
-      "artist_ids": []
+      "artist_ids": [
+        "Gi-IgqHE2AB"
+      ]
     },
     {
       "song_id": "Of2popnGI_G",
       "title": "Rё∀L",
-      "artist_ids": []
+      "artist_ids": [
+        "FrmhdlK6rM2"
+      ]
     }
   ]
 }
