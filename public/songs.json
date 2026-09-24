@@ -8493,27 +8493,30 @@
     {
       "song_id": "KtYW8UuRyAL",
       "title": "Daylight",
-      "artist_ids": []
+      "artist_ids": [
+        "h7kj860OyvV"
+      ]
     },
     {
       "song_id": "MafqPScp5ev",
       "title": "Doors ～勇気の軌跡～",
-      "artist_ids": []
+      "artist_ids": [
+        "h7kj860OyvV"
+      ]
     },
     {
       "song_id": "fD3iS1gChWC",
       "title": "妖精",
-      "artist_ids": []
+      "artist_ids": [
+        "GTAvrYVPmP_"
+      ]
     },
     {
       "song_id": "j12XEuwrQ7U",
       "title": "Hello",
-      "artist_ids": []
-    },
-    {
-      "song_id": "2j1JZc0-G1W",
-      "title": "灯台 (オリ曲)",
-      "artist_ids": []
+      "artist_ids": [
+        "EFrqfX5RK4B"
+      ]
     }
   ]
 }
