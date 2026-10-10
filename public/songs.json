@@ -8549,12 +8549,16 @@
     {
       "song_id": "4d61dp6VYpS",
       "title": "星に願いを",
-      "artist_ids": []
+      "artist_ids": [
+        "mifXP21KO0d"
+      ]
     },
     {
       "song_id": "3yAjlLQGVVA",
-      "title": "星のあしあと (オリ曲)",
-      "artist_ids": []
+      "title": "星のあしあと",
+      "artist_ids": [
+        "irSwKLQP04X"
+      ]
     }
   ]
 }
